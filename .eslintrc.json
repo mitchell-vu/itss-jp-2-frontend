@@ -17,6 +17,7 @@
   },
   "plugins": ["react-refresh", "prettier"],
   "rules": {
-    "react-refresh/only-export-components": "warn"
+    "react-refresh/only-export-components": "warn",
+    "@typescript-eslint/no-empty-interface": "warn"
   }
 }
