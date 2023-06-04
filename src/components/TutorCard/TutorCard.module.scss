@@ -1,0 +1,30 @@
+.cardTutor{
+    -webkit-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_image {
+  height: 200px;
+  width: 200px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.title {
+    font-size: 20px;
+    font-style: bold;
+}
+
+.info {
+    font-size: 15px;
+    color: #4e4c4c;
+}

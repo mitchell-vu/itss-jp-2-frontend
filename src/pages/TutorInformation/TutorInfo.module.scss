@@ -1,0 +1,27 @@
+.detailInfoContainer{
+    -webkit-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.info_container {
+    border-bottom: 1px solid #f79f56;
+}
+
+.info_container:last-child {
+    border-bottom: 1px solid #ffffff;
+}
+
+.title {
+    font-size: 20px;
+    font-style: bold;
+}
+
+
+.info {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #4e4c4c;
+}
