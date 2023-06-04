@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import { HomePage, LoginPage, ListTeacherPage } from './pages';
+import { HomePage, ListTeacherPage, SearchPage, LoginPage } from './pages';
 
 const App = () => {
   const location = useLocation();
@@ -15,6 +15,7 @@ const App = () => {
       <Route element={<Layout />}>
         <Route path="" element={<HomePage />} />
         <Route path="list-teacher" element={<ListTeacherPage />} />
+        <Route path="search-teacher" element={<SearchPage />} />
         <Route path="auth">
           <Route path="login" element={<LoginPage />} />
           <Route path="sign-up" element={<LoginPage />} />

@@ -28,7 +28,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
                   />
                 </div>
                 <div className="font-bold text-xl">先生の名前</div>
-                <div className="font-extralight">先生の情報</div>
+                <div className="font-extralight leading-6 text-gray-600">先生の情報</div>
               </div>
             ))}
           </div>
@@ -47,7 +47,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
                   />
                 </div>
                 <div className="font-bold text-xl">先生の名前</div>
-                <div className="font-extralight">先生の情報</div>
+                <div className="font-extralight leading-6 text-gray-600">先生の情報</div>
               </div>
             ))}
           </div>
