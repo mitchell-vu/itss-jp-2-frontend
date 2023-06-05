@@ -47,21 +47,20 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = (props) => {
               </div>
 
               <div className="sm:col-span-4">
-                <label htmlFor="subject" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="fee" className="block text-sm font-medium leading-6 text-gray-900">
                 授業料
                 </label>
                 <div className="mt-2">
                   <select
-                    id="subject"
-                    name="subject"
-                    autoComplete="subject-name"
+                    id="fee"
+                    name="fee"
+                    autoComplete="fee"
                     className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
                   >
-                    <option>数学</option>
-                    <option>英語</option>
-                    <option>物理</option>
-                    <option>化学</option>
-                    <option>哲学</option>
+                    <option>25万ドン以下</option>
+                    <option>25-30万ドン</option>
+                    <option>30-35万ドン</option>
+                    <option>35万ドン以上</option>
                   </select>
                 </div>
               </div>
@@ -77,9 +76,9 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = (props) => {
                     autoComplete="experience"
                     className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
                   >
-                    <option>1年以下</option>
-                    <option>1年ー5年</option>
-                    <option>5年以上</option>
+                    <option>3年以下</option>
+                    <option>3-5年</option>
+                    <option>5-7年</option>
                     <option>7年以上</option>
                   </select>
                 </div>

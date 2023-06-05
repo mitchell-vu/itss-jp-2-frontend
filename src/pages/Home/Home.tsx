@@ -58,7 +58,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
         <section className='flex flex-col items-center justify-center'>
           <h2 className='mb-10 text-4xl font-bold'>似合う先生を探そう</h2>
           <div className="flex flex-row gap-3">
-            <Link to="/list-teacher" className="rounded-lg bg-teal-500 px-20 py-3 text-xl text-white">
+            <Link to="/search-teacher" className="rounded-lg bg-red-500 px-16 py-3 text-xl text-white flex justify-content">
               検索
             </Link>
           </div>
