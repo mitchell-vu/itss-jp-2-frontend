@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export const Footer = () => {
   return (
     <section className="mobile:px-4 bg-gray-50 px-[8%] py-16">
-      <div className="mobile:flex-col flex justify-between border-b border-solid border-gray-200 pb-8">
+      {/* <div className="mobile:flex-col flex justify-between border-b border-solid border-gray-200 pb-8">
         <div className="flex max-w-[500px] flex-col">
           <span className="text-xs font-semibold uppercase tracking-widest text-gray-500">
             Đăng ký nhận bản tin ngay
@@ -27,7 +27,7 @@ export const Footer = () => {
             Đăng ký ngay
           </button>
         </div>
-      </div>
+      </div> */}
 
       <div className="mobile:flex-col flex justify-between border-b border-solid border-gray-200 pb-8 pt-16">
         <div>

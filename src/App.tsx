@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import { HomePage, LoginPage } from './pages';
+import { HomePage, ListTeacherPage, LoginPage, SearchPage } from './pages';
 import TutorInfo from './pages/TutorInformation/TutorInfo';
 
 const App = () => {
@@ -16,6 +16,8 @@ const App = () => {
       <Route element={<Layout />}>
         <Route path="" element={<HomePage />} />
         <Route path="tutorInfo" element={<TutorInfo />} />
+        <Route path="list-teacher" element={<ListTeacherPage />} />
+        <Route path="search-teacher" element={<SearchPage />} />
 
         <Route path="auth">
           <Route path="login" element={<LoginPage />} />
