@@ -15,7 +15,7 @@ const App = () => {
     <Routes>
       <Route element={<Layout />}>
         <Route path="" element={<HomePage />} />
-        <Route path="tutorInfo" element={<TutorInfo />} />
+        <Route path="tutorInfo/:id" element={<TutorInfo />} />
         <Route path="list-teacher" element={<ListTeacherPage />} />
         <Route path="search-teacher" element={<SearchPage />} />
 
