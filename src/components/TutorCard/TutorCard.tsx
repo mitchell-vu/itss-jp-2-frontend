@@ -17,30 +17,34 @@ function TutorCard(props: FixMeLater) {
     );
   }
   return (
-    <div className={classNames(styles['cardTutor'])}>
-      <div className={classNames(styles['card'], 'flex')}>
+    <div className='mt-8 max-w-sm rounded overflow-hidden shadow-2xl p-8 bg-white'>
+      <div className={classNames(styles['card'])}>
         <img src="../../../public/nhiep-anh-10.jpg" alt="" className={classNames(styles['card_image'])} />
-      </div>
-      <span>{details.name}</span>
-      <div className={classNames(styles.star, 'flex')}>
-        <AiOutlineStar />
-        <AiOutlineStar />
-        <AiOutlineStar />
-        <AiOutlineStar />
-        <AiOutlineStar />
+      
+        <h3 className='font-semibold text-2xl'>{details.name}</h3>
+        <div className={classNames(styles.star, 'flex')}>
+          <AiOutlineStar />
+          <AiOutlineStar />
+          <AiOutlineStar />
+          <AiOutlineStar />
+          <AiOutlineStar />
+        </div>
       </div>
       <div>
-        <div className={classNames(styles.title)}>宛先</div>
-        <p className={classNames(styles.info)}>{details['address']}</p>
-        <div className={classNames(styles.title)}>メール</div>
-        <p className={classNames(styles.info)}>{details['email']}</p>
-        <div className={classNames(styles.title)}>電話番号</div>
-        <p className={classNames(styles.info)}>{details['phone']}</p>
-        <button className="justify-content flex rounded-lg bg-red-500 px-10 py-1 text-xl text-white" onClick={handleRequest}>
-            要求
-        </button>
+        <div className={classNames(styles.title, 'mt-4')}>宛先</div>
+        <p className={classNames(styles.info)}>{details['address']?details['address']:'なし'}</p>
+        <div className={classNames(styles.title, 'mt-2')}>メール</div>
+        <p className={classNames(styles.info)}>{details['email']?details['email']:'なし'}</p>
+        <div className={classNames(styles.title, 'mt-2')}>電話番号</div>
+        <p className={classNames(styles.info)}>{details['phone']?details['phone']:'なし'}</p>
+        <div className='flex items-center mt-5'>
+          <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-xl text-white" onClick={handleRequest}>
+              要求
+          </button>
+        </div>
       </div>
     </div>
+    
   );
 }
 
