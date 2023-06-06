@@ -21,32 +21,32 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
   }, [id]);
   console.log('Details:', Details);
   return (
-    <div>
+    <div className=''>
       {Details ? (
         Details.map((data) => (
           <div className="container grid grid-cols-7">
             <div className="col-span-2">
               <TutorCard details={data} />
             </div>
-            <div className={classNames(styles.detailInfoContainer, 'col-span-5')}>
+            <div className={classNames(styles.detailInfoContainer, 'col-span-5 mt-8 rounded overflow-hidden shadow-2xl p-8 bg-white')}>
               <h1 className="text-3xl">講師の情報</h1>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
+              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
                 <div className={classNames(styles.title, 'col-span-2')}>伝記</div>
                 <p className={classNames(styles.info, 'col-span-5')}>{data['description']}</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
+              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
                 <div className={classNames(styles.title, 'col-span-2')}>教育レベル</div>
                 <p className={classNames(styles.info, 'col-span-5')}>{data['experience_year']} year</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
+              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
                 <div className={classNames(styles.title, 'col-span-2')}>政策</div>
-                <p className={classNames(styles.info, 'col-span-5')}>{data['fee']}USD/1時間</p>
+                <p className={classNames(styles.info, 'col-span-5')}>{data['fee']}K/1時間</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
+              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
                 <div className={classNames(styles.title, 'col-span-2')}>科目</div>
                 <p className={classNames(styles.info, 'col-span-5')}>ベトナム語</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
+              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
                 <div className={classNames(styles.title, 'col-span-2')}>コメント</div>
                 <div className={classNames(styles.info, 'col-span-5')}>
                   <div className="mb-3">
@@ -60,7 +60,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       />
 
                       <button
-                        className="hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800 relative z-[2] flex items-center rounded-r bg-red-600 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                        className="hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800 relative z-[2] flex items-center rounded-r bg-red-600 px-6 py-2.5 text-sm font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
                         type="button"
                         id="button-addon1"
                         data-te-ripple-init

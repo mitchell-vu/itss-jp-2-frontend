@@ -11,6 +11,7 @@ interface DataType {
   name: string | undefined;
   experience_year: number | undefined;
   fee: number | undefined;
+  rate: string | undefined;
 }
 
 const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
@@ -22,6 +23,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
   const [gender, setGender] = useState<number | undefined>(undefined);
   const [fee, setFee] = useState<number | undefined>(undefined);
   const [experience, setExperience] = useState<number | undefined>(undefined);
+  const [rate, setRate] = useState<string | undefined>(undefined);
 
   const [search, setSearch] = useState<DataType>({
     page: undefined,
@@ -29,6 +31,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     name: undefined,
     experience_year: undefined,
     fee: undefined,
+    rate: undefined
   });
 
   useEffect(() => {
@@ -58,6 +61,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
       name: name,
       experience_year: experience,
       fee: fee,
+      rate: rate,
     });
   };
 
@@ -166,13 +170,17 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
                       id="rate"
                       name="rate"
                       autoComplete="rate"
+                      value={rate?rate:""}
+                      onChange={(e) => {
+                        e.target.value == '' ? setRate(undefined) : setRate(e.target.value);
+                      }}
                       className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6"
                     >
                       <option value="" disabled selected>
                         --並べ替え--
                       </option>
-                      <option>最も高い</option>
-                      <option>最も低い</option>
+                      <option value='desc'>最も高い</option>
+                      <option value='asc'>最も低い</option>
                     </select>
                   </div>
                 </div>

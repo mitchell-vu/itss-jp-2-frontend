@@ -22,7 +22,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
 
   return (
     <>
-      <div className={classNames(styles.hero, 'gap-8')}>
+      <div className={classNames(styles.hero)}>
         <div className={classNames(styles.bluebox)}></div>
         <h1 className={classNames(styles.slogan, 'text-8xl')}>
           ようこそ、<span className="text-red-500">バナナ先生</span>へ
@@ -150,8 +150,8 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
 
       <div className="container">
         <section className="flex flex-col items-center justify-center">
-          <h2 className="mb-10 text-4xl font-bold">似合う先生を探そう</h2>
-          <div className="flex flex-row gap-3">
+          <h2 className="text-4xl font-bold">似合う先生を探そう</h2>
+          <div className="flex flex-row gap-3 my-10">
             <Link
               to="/search-teacher"
               className="justify-content flex rounded-lg bg-red-500 px-16 py-3 text-xl text-white"
