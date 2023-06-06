@@ -33,32 +33,34 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
           <h2 className={classNames(styles.title,'mb-10 text-5xl')}>今月の先生</h2>
           <div className="grid grid-cols-3 gap-4">
             {dataNew ? dataNew.map((data) => (
-              <div className="flex flex-col gap-3">
-                <div className="h-60 w-full">
-                  <img
-                    src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg"
-                    alt="Teacher"
-                    className="h-full w-full rounded-lg object-cover"
-                  />
+              <Link to={"/tutorInfo/" + data['id_teacher']}>
+                <div className="flex flex-col gap-3">
+                  <div className="h-60 w-full">
+                    <img
+                      src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg"
+                      alt="Teacher"
+                      className="h-full w-full rounded-lg object-cover"
+                    />
+                  </div>
+                  <div className="font-bold text-xl">{data['name']}</div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">授業料: 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
+                  </div>
                 </div>
-                <div className="font-bold text-xl">{data['name']}</div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">授業料: 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
-                </div>
-              </div>
+              </Link>
             )): <></>}
           </div>
         </section>
@@ -67,32 +69,34 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
           <h2 className={classNames(styles.title,'mb-10 text-5xl')}>新しい先生</h2>
           <div className="grid grid-cols-3 gap-4">
             {dataTop ? dataTop.map((data) => (
-              <div className="flex flex-col gap-3">
-                <div className="h-60 w-full">
-                  <img
-                    src="https://t4.ftcdn.net/jpg/01/13/31/65/360_F_113316547_q9wiDxadvidz5UvKITGbJMvzqrDw45Kl.jpg"
-                    alt="Teacher"
-                    className="h-full w-full rounded-lg object-cover"
-                  />
+              <Link to={"/tutorInfo/" + data['id_teacher']}>
+                <div className="flex flex-col gap-3">
+                  <div className="h-60 w-full">
+                    <img
+                      src="https://t4.ftcdn.net/jpg/01/13/31/65/360_F_113316547_q9wiDxadvidz5UvKITGbJMvzqrDw45Kl.jpg"
+                      alt="Teacher"
+                      className="h-full w-full rounded-lg object-cover"
+                    />
+                  </div>
+                  <div className="font-bold text-xl">{data['name']}</div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">授業料: 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
+                    <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
+                  </div>
                 </div>
-                <div className="font-bold text-xl">{data['name']}</div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">授業料: 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
-                </div>
-                <div>
-                  <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
-                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
-                </div>
-              </div>
+              </Link>
             )) : <></>}
           </div>
         </section>
