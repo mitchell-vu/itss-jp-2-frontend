@@ -1,11 +1,25 @@
 import classNames from 'classnames';
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Home.module.scss';
 import { Link } from 'react-router-dom';
+import {getListNewTeacher, getListTopTeacher} from "../../service/teacher";
 
 interface HomePageProps {}
 
 const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
+  const [dataNew, setDataNew] = useState<[]>();
+  const [dataTop, setDataTop] = useState<[]>();
+
+  useEffect(() => {
+    getListNewTeacher().then((val) => {
+      setDataNew(val.data);
+    });
+
+    getListTopTeacher().then((val2) => {
+      setDataTop(val2.data);
+    });
+  }, []);
+
   return (
     <>
       <div className={classNames(styles.hero, 'gap-8')}>
@@ -18,7 +32,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
         <section className="my-14">
           <h2 className={classNames(styles.title,'mb-10 text-5xl')}>今月の先生</h2>
           <div className="grid grid-cols-3 gap-4">
-            {[...Array(9)].map(() => (
+            {dataNew ? dataNew.map((data) => (
               <div className="flex flex-col gap-3">
                 <div className="h-60 w-full">
                   <img
@@ -27,17 +41,32 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
                     className="h-full w-full rounded-lg object-cover"
                   />
                 </div>
-                <div className="font-bold text-xl">先生の名前</div>
-                <div className="font-extralight leading-6 text-gray-600">先生の情報</div>
+                <div className="font-bold text-xl">{data['name']}</div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">授業料: 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
+                </div>
               </div>
-            ))}
+            )): <></>}
           </div>
         </section>
 
         <section className="my-14">
           <h2 className={classNames(styles.title,'mb-10 text-5xl')}>新しい先生</h2>
           <div className="grid grid-cols-3 gap-4">
-            {[...Array(9)].map(() => (
+            {dataTop ? dataTop.map((data) => (
               <div className="flex flex-col gap-3">
                 <div className="h-60 w-full">
                   <img
@@ -46,10 +75,25 @@ const HomePage: React.FunctionComponent<HomePageProps> = (props) => {
                     className="h-full w-full rounded-lg object-cover"
                   />
                 </div>
-                <div className="font-bold text-xl">先生の名前</div>
-                <div className="font-extralight leading-6 text-gray-600">先生の情報</div>
+                <div className="font-bold text-xl">{data['name']}</div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">年齢 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['age']}</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">授業料: 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['fee']} K</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">経験年数 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['experience_year']}年</span></p>
+                </div>
+                <div>
+                  <p className="font-semibold text-base leading-6 text-black-900">詳細の情報 : 
+                  <span className="font-extralight pl-1 text-base leading-6 text-black-300"> {data['description']}</span></p>
+                </div>
               </div>
-            ))}
+            )) : <></>}
           </div>
         </section>
       </div>
