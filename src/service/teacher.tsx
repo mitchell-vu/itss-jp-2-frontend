@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
+import { FixMeLater } from '../vite-env';
 
-const domain = "https://banana-sensei-production-b2aa.up.railway.app";
-
+const domain = 'https://banana-sensei-production-b2aa.up.railway.app';
 
 function getListTopTeacher() {
   const response = axios.get(`${domain}/api/teachers/top`);
@@ -9,26 +9,20 @@ function getListTopTeacher() {
 }
 
 function getListNewTeacher() {
-    const response = axios.get(`${domain}/api/teachers/new`);
-    return response;
-  }
-  
-
-function searchTeacher(data: {}) {
-    const response = axios.get(`${domain}/api/teachers/search`, {
-      params: data,
-    });
-    return response;
-  }
-
-function getTeacherDetail(_id:string){
-    const response = axios.get(`${domain}/api/teachers/${_id}`);
-    return response;
+  const response = axios.get(`${domain}/api/teachers/new`);
+  return response;
 }
 
-export {
-    getListTopTeacher,
-    getListNewTeacher,
-    searchTeacher,
-    getTeacherDetail
-};
+function searchTeacher(data?: FixMeLater) {
+  const response = axios.get(`${domain}/api/teachers/search`, {
+    params: data,
+  });
+  return response;
+}
+
+function getTeacherDetail(_id: string) {
+  const response = axios.get(`${domain}/api/teachers/${_id}`);
+  return response;
+}
+
+export { getListNewTeacher, getListTopTeacher, getTeacherDetail, searchTeacher };

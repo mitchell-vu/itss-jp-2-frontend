@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import TutorCard from '../../components/TutorCard/TutorCard';
 import TutorReview from '../../components/TutorReview/TutorReview';
 import { getTeacherDetail } from '../../service/teacher';
 import styles from './TutorInfo.module.scss';
-import { useParams } from 'react-router-dom';
 
 interface TutorInfoProps {}
 
-const TutorInfo: React.FunctionComponent<TutorInfoProps> = (props: any) => {
+const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
   const [Details, setDetails] = useState<[]>();
   const params = useParams();
 
@@ -18,7 +18,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = (props: any) => {
     getTeacherDetail(String(id)).then((teacher) => {
       setDetails(teacher.data);
     });
-  }, [1]);
+  }, [id]);
   console.log('Details:', Details);
   return (
     <div>
@@ -28,7 +28,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = (props: any) => {
             <div className="col-span-2">
               <TutorCard details={data} />
             </div>
-            <div className={classNames(styles.detailInfoContainer, ' col-span-5')}>
+            <div className={classNames(styles.detailInfoContainer, 'col-span-5')}>
               <h1 className="text-3xl">講師の情報</h1>
               <div className={classNames(styles.info_container, 'grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>伝記</div>
