@@ -21,32 +21,37 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
   }, [id]);
   console.log('Details:', Details);
   return (
-    <div className=''>
+    <div className="">
       {Details ? (
         Details.map((data) => (
           <div className="container grid grid-cols-7">
             <div className="col-span-2">
               <TutorCard details={data} />
             </div>
-            <div className={classNames(styles.detailInfoContainer, 'col-span-5 mt-8 rounded overflow-hidden shadow-2xl p-8 bg-white')}>
+            <div
+              className={classNames(
+                styles.detailInfoContainer,
+                'col-span-5 mt-8 overflow-hidden rounded bg-white p-8 shadow-2xl',
+              )}
+            >
               <h1 className="text-3xl">講師の情報</h1>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
+              <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>伝記</div>
                 <p className={classNames(styles.info, 'col-span-5')}>{data['description']}</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
+              <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>教育レベル</div>
                 <p className={classNames(styles.info, 'col-span-5')}>{data['experience_year']} year</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
+              <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>政策</div>
                 <p className={classNames(styles.info, 'col-span-5')}>{data['fee']}K/1時間</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
+              <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>科目</div>
                 <p className={classNames(styles.info, 'col-span-5')}>ベトナム語</p>
               </div>
-              <div className={classNames(styles.info_container, 'grid grid-cols-7 mt-3')}>
+              <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
                 <div className={classNames(styles.title, 'col-span-2')}>コメント</div>
                 <div className={classNames(styles.info, 'col-span-5')}>
                   <div className="mb-3">

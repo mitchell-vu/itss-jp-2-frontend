@@ -31,7 +31,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     name: undefined,
     experience_year: undefined,
     fee: undefined,
-    rate: undefined
+    rate: undefined,
   });
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
                       id="rate"
                       name="rate"
                       autoComplete="rate"
-                      value={rate?rate:""}
+                      value={rate ? rate : ''}
                       onChange={(e) => {
                         e.target.value == '' ? setRate(undefined) : setRate(e.target.value);
                       }}
@@ -179,8 +179,8 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
                       <option value="" disabled selected>
                         --並べ替え--
                       </option>
-                      <option value='desc'>最も高い</option>
-                      <option value='asc'>最も低い</option>
+                      <option value="desc">最も高い</option>
+                      <option value="asc">最も低い</option>
                     </select>
                   </div>
                 </div>

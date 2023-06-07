@@ -2,7 +2,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 
 function TutorReview() {
   return (
-    <div className='mb-5'>
+    <div className="mb-5">
       <div className="flex">
         <AiOutlineStar />
         <AiOutlineStar />

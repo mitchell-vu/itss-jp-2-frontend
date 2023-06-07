@@ -1,5 +1,4 @@
 import { AiFillFacebook, AiFillYoutube, AiOutlineInstagram } from 'react-icons/ai';
-import { HiOutlineMail, HiOutlineMap, HiOutlinePhone } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
 
 export const Footer = () => {
@@ -29,7 +28,7 @@ export const Footer = () => {
         </div>
       </div> */}
 
-      <div className="mobile:flex-col flex justify-between border-b border-solid border-white-200 pb-8 pt-16">
+      <div className="mobile:flex-col border-white-200 flex justify-between border-b border-solid pb-8 pt-16">
         <div>
           <div className="text-3xl text-white">バナナ先生</div>
 
@@ -58,7 +57,7 @@ export const Footer = () => {
         </div>
 
         <div className="mobile:flex-col mobile:items-start mobile:mt-8 flex items-center">
-          <p className='text-gray-300'> Design ©2023 Created by Team Nakama and Banana</p>
+          <p className="text-gray-300"> Design ©2023 Created by Team Nakama and Banana</p>
         </div>
       </div>
     </section>

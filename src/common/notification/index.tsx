@@ -1,28 +1,24 @@
-import { notification } from "antd";
+import { notification } from 'antd';
 
-export const pushNotification = (
-  mesage: string,
-  description: string,
-  type: string
-) => {
-  if (type === "success")
-    notification["success"]({
+export const pushNotification = (mesage: string, description: string, type: string) => {
+  if (type === 'success')
+    notification['success']({
       message: `${mesage}`,
       description: `${description}`,
-      placement: "topRight",
+      placement: 'topRight',
     });
   else {
-    if (type === "info")
-      notification["info"]({
+    if (type === 'info')
+      notification['info']({
         message: `${mesage}`,
         description: `${description}`,
-        placement: "topRight",
+        placement: 'topRight',
       });
     else
-      notification["error"]({
+      notification['error']({
         message: `${mesage}`,
         description: `${description}`,
-        placement: "topRight",
+        placement: 'topRight',
       });
   }
 };

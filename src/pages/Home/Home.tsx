@@ -151,7 +151,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
       <div className="container">
         <section className="flex flex-col items-center justify-center">
           <h2 className="text-4xl font-bold">似合う先生を探そう</h2>
-          <div className="flex flex-row gap-3 my-10">
+          <div className="my-10 flex flex-row gap-3">
             <Link
               to="/search-teacher"
               className="justify-content flex rounded-lg bg-red-500 px-16 py-3 text-xl text-white"
