@@ -11,7 +11,9 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
           バナナ先生
         </Link>
         <div className="flex flex-row gap-3">
-          <button className="p-3">サイアップ</button>
+          <Link to="/auth/sign-up" className="p-3">
+            サイアップ
+          </Link>
           <Link to="/auth/login" className="rounded-lg bg-orange-400  p-3 text-white">
             ログイン
           </Link>
