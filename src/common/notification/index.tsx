@@ -1,22 +1,28 @@
 import { notification } from 'antd';
 
-export const pushNotification = (mesage: string, description: string, type: string) => {
+export const pushNotification = (message: string, description: string, type: string) => {
   if (type === 'success')
-    notification['success']({
-      message: `${mesage}`,
-      description: `${description}`,
+  notification['success']({
+      className:"bg-teal-50 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md",
+      style: {backgroundColor: "#f0fdfa"},
+      message: <h3 className="text-xl font-bold text-teal-600">{message}</h3>,
+      description: 
+        <div className="text-sm text-teal-700 font-medium">
+          {description}
+        </div>,
       placement: 'topRight',
+      icon: <svg className="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg>
     });
   else {
     if (type === 'info')
       notification['info']({
-        message: `${mesage}`,
+        message: `${message}`,
         description: `${description}`,
         placement: 'topRight',
       });
     else
       notification['error']({
-        message: `${mesage}`,
+        message: `${message}`,
         description: `${description}`,
         placement: 'topRight',
       });

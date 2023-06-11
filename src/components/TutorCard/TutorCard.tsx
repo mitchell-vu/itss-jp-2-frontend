@@ -4,26 +4,33 @@ import { pushNotification } from '../../common/notification';
 import { NOTIFICATION_TYPE } from '../../const/notification';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
+import { Rate } from 'antd';
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
   console.log('details2:', details);
 
   const handleRequest = () => {
-    pushNotification('成功', 'リクエストは管理者による承認待ちです。', NOTIFICATION_TYPE.SUCCESS);
+    pushNotification('Success', 'リクエストは教師からの返答を待っています。', NOTIFICATION_TYPE.SUCCESS);
   };
   return (
     <div className="mt-8 max-w-sm overflow-hidden rounded bg-white p-8 shadow-2xl">
       <div className={classNames(styles['card'])}>
-        <img src="../../../public/nhiep-anh-10.jpg" alt="" className={classNames(styles['card_image'])} />
-
-        <h3 className="text-2xl font-semibold">{details.name}</h3>
+      <div className=" relative h-40 w-40   sm:mb-0 mb-3">
+						<img src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg" alt="aji" className=" w-40 h-40 object-cover rounded-2xl"/>
+						{/* <a href="#"
+							className="absolute -right-2 bottom-2   -ml-3  text-white p-1 text-xs bg-green-400 hover:bg-green-500 font-medium tracking-wider rounded-full transition ease-in duration-300">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+								className="h-4 w-4">
+								<path
+									d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+								</path>
+							</svg>
+						</a> */}
+					</div>
+        <h3 className="text-3xl mt-3 font-semibold">{details.name}</h3>
         <div className={classNames(styles.star, 'flex')}>
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
+          <Rate allowHalf disabled defaultValue={2.5} style={{color: "#ea580c"}}/>
         </div>
       </div>
       <div>
