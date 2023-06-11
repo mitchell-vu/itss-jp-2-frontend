@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getListNewTeacher, getListTopTeacher } from '../../service/teacher';
 import styles from './Home.module.scss';
+import TeacherItem from '../../components/TeacherItem/TeacherItem';
 
 interface HomePageProps {}
 
@@ -38,51 +39,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
           <div className="grid grid-cols-3 gap-4">
             {dataNew ? (
               dataNew.map((data) => (
-                <Link to={'/tutorInfo/' + data['id_teacher']}>
-                  <div className="flex flex-col gap-3">
-                    <div className="h-60 w-full">
-                      <img
-                        src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg"
-                        alt="Teacher"
-                        className="h-full w-full rounded-lg object-cover"
-                      />
-                    </div>
-                    <div className="text-xl font-bold">{data['name']}</div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        年齢 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6"> {data['age']}</span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        授業料:
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['fee']} K
-                        </span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        経験年数 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['experience_year']}年
-                        </span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        詳細の情報 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['description']}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <TeacherItem key={data['id_teacher']} data={data}/>
               ))
             ) : (
               <></>
@@ -95,51 +52,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
           <div className="grid grid-cols-3 gap-4">
             {dataTop ? (
               dataTop.map((data) => (
-                <Link to={'/tutorInfo/' + data['id_teacher']}>
-                  <div className="flex flex-col gap-3">
-                    <div className="h-60 w-full">
-                      <img
-                        src="https://t4.ftcdn.net/jpg/01/13/31/65/360_F_113316547_q9wiDxadvidz5UvKITGbJMvzqrDw45Kl.jpg"
-                        alt="Teacher"
-                        className="h-full w-full rounded-lg object-cover"
-                      />
-                    </div>
-                    <div className="text-xl font-bold">{data['name']}</div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        年齢 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6"> {data['age']}</span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        授業料:
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['fee']} K
-                        </span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        経験年数 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['experience_year']}年
-                        </span>
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-black-900 text-base font-semibold leading-6">
-                        詳細の情報 :
-                        <span className="text-black-300 pl-1 text-base font-extralight leading-6">
-                          {' '}
-                          {data['description']}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                <TeacherItem key={data['id_teacher']} data={data}/>
               ))
             ) : (
               <></>

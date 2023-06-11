@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    <section className="mobile:px-4 bg-sky-900 px-[8%] py-16">
+    <section className="mobile:px-4 bg-teal-700 px-[8%] py-16">
       {/* <div className="mobile:flex-col flex justify-between border-b border-solid border-white-200 pb-8">
         <div className="flex max-w-[500px] flex-col">
           <span className="text-xs font-semibold uppercase tracking-widest text-white-500">
