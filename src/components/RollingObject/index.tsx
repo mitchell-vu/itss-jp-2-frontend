@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, ReactNode } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import './RollingObject.scss';
 
 interface RollingObjectProps {
@@ -12,7 +12,6 @@ const RollingObject: React.FC<RollingObjectProps> = ({ children }) => {
     const handleScroll = () => {
       const object = objectRef.current;
       if (object) {
-        const scrollPosition = window.pageYOffset;
         object.style.transition = `transform 0.5s ease-out`;
       }
     };
@@ -24,8 +23,8 @@ const RollingObject: React.FC<RollingObjectProps> = ({ children }) => {
   }, []);
 
   return (
-      <div className="rolling-object" ref={objectRef}>
-        <div>{children}</div>
+    <div className="rolling-object" ref={objectRef}>
+      <div>{children}</div>
     </div>
   );
 };

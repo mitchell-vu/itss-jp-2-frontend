@@ -59,7 +59,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                     <div className="relative mb-4 flex w-full flex-wrap items-stretch">
                       <input
                         type="search"
-                        className="focus:border-red-600 dark:focus:border-red-600 relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-red-600 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(204, 0, 0)] focus:outline-none dark:border-red-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                        className="focus:shadow-[inset_0_0_0_1px_rgb(204, 0, 0)] relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-red-600 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-red-600 focus:text-neutral-700 focus:outline-none dark:border-red-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-red-600"
                         placeholder="input text"
                         aria-label="Search"
                         aria-describedby="button-addon1"

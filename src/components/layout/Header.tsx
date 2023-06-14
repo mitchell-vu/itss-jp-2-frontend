@@ -1,12 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-import React, {Fragment, useState} from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {}
 
 const Header: React.FunctionComponent<HeaderProps> = () => {
-  const [isLoggedin, setLoggedin] = useState(true);
+  const isLoggedin = true;
+
   return (
     <header className="sticky left-0 top-0 z-20 bg-white">
       <div className="container flex flex-row items-center justify-between border-b py-4">
@@ -24,16 +25,15 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
               />
             </svg>
           </Link>
-          {isLoggedin ?
+          {isLoggedin ? (
             <div id="profile" className="">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  
                   <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white text-sm font-semibold text-gray-900">
                     <img
                       src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                       alt="Avatar user"
-                      className="w-10 md:w-12 rounded-full mx-auto"
+                      className="mx-auto w-10 rounded-full md:w-12"
                     />
                   </Menu.Button>
                 </div>
@@ -55,7 +55,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm'
+                              'block px-4 py-2 text-sm',
                             )}
                           >
                             Account settings
@@ -68,7 +68,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm'
+                              'block px-4 py-2 text-sm',
                             )}
                           >
                             Support
@@ -81,7 +81,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                              'block px-4 py-2 text-sm'
+                              'block px-4 py-2 text-sm',
                             )}
                           >
                             License
@@ -97,7 +97,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                               type="submit"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block w-full px-4 py-2 text-left text-sm'
+                                'block w-full px-4 py-2 text-left text-sm',
                               )}
                             >
                               Sign out
@@ -109,14 +109,17 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                   </Menu.Items>
                 </Transition>
               </Menu>
-            </div> : 
+            </div>
+          ) : (
             <>
-              <Link to="/auth/login" className="dark:text-gray-500 hover:bg-gray-50 font-medium rounded-lg text-base p-3 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-400 border-2 border-gray-400 hover:text-white">
+              <Link
+                to="/auth/login"
+                className="mr-2 rounded-lg border-2 border-gray-400 p-3 py-2 text-base font-medium hover:bg-gray-50 hover:text-white dark:text-gray-500 dark:hover:bg-gray-400 lg:px-5 lg:py-2.5"
+              >
                 ログイン
               </Link>
-            </> 
-          
-          }
+            </>
+          )}
         </div>
       </div>
     </header>
