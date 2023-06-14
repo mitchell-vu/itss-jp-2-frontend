@@ -1,27 +1,10 @@
 import { Rate } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-interface MyObject {
-  id_teacher: number;
-  name: string;
-  age: number;
-  gender: number;
-  email: string;
-  phone: string;
-  address: string;
-  description: string;
-  experience_year: number;
-  fee: number;
-  created_at: string;
-  updated_at: string;
-  total_comments: number;
-  rate: number;
-  comments: [];
-}
+import { TutorInformation } from '../../vite-env';
 
 interface TeacherItemProps {
-  data: MyObject;
+  data: TutorInformation;
 }
 
 const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
@@ -43,7 +26,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
                   <Rate allowHalf disabled defaultValue={2.5} style={{ color: '#ea580c' }} />
                 </div>
               </div>
-              {data['experience_year'] >= 7 && (
+              {data.experience_year && data.experience_year >= 7 && (
                 <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-red-500 px-3 py-2 text-sm font-medium text-white">
                   勉強中{' '}
                 </span>
