@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -5,9 +6,8 @@ import TutorCard from '../../components/TutorCard/TutorCard';
 import TutorReview from '../../components/TutorReview/TutorReview';
 import { getTeacherDetail } from '../../service/teacher';
 import { TutorInformation } from '../../vite-env';
-import styles from './TutorInfo.module.scss';
-import { Modal } from 'antd';
 import ModalAddReview from './ModalAddReview';
+import styles from './TutorInfo.module.scss';
 
 interface TutorInfoProps {}
 
@@ -37,8 +37,8 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     setTimeout(() => {
       setOpen(false);
       window.location.reload();
-  }, 2000);
-  }
+    }, 2000);
+  };
 
   return (
     <div className="">
@@ -94,18 +94,9 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                     >
                       コメントを追加
                     </button>
-                    <Modal
-                        className='shadow-lg'
-                        open={open}
-                        onCancel={hideModal}
-                        destroyOnClose={true}
-                        footer={null}
-                      >
-                        <ModalAddReview
-                            handleCancel={hideModal}
-                            handleOK={handleOK}
-                        />
-                      </Modal>
+                    <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
+                      <ModalAddReview handleCancel={hideModal} handleOK={handleOK} />
+                    </Modal>
                   </div>
                 </div>
                 <TutorReview />

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import TeacherItem from '../../components/TeacherItem/TeacherItem';
 import { searchTeacher } from '../../service/teacher';
 
-
 interface SearchPageProps {}
 
 interface DataType {
@@ -35,7 +34,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     fee: undefined,
     rate: undefined,
   });
-  
+
   useEffect(() => {
     searchTeacher(search).then((val) => {
       setDataSource(val.data.data);
