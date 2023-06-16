@@ -95,7 +95,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       コメントを追加
                     </button>
                     <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
-                      <ModalAddReview handleCancel={hideModal} handleOK={handleOK} />
+                      <ModalAddReview handleOK={handleOK} />
                     </Modal>
                   </div>
                 </div>

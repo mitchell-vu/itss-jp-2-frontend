@@ -1,10 +1,10 @@
 import { Rate } from 'antd';
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
 interface ModalAddReviewProps {
-  handleOK: FunctionComponent;
+  handleOK: () => void;
 }
 
 const ModalAddReview = (props: ModalAddReviewProps) => {
