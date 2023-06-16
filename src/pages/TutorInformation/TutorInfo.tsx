@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -5,12 +6,14 @@ import TutorCard from '../../components/TutorCard/TutorCard';
 import TutorReview from '../../components/TutorReview/TutorReview';
 import { getTeacherDetail } from '../../service/teacher';
 import { TutorInformation } from '../../vite-env';
+import ModalAddReview from './ModalAddReview';
 import styles from './TutorInfo.module.scss';
 
 interface TutorInfoProps {}
 
 const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
   const [details, setDetails] = useState<TutorInformation>();
+  const [open, setOpen] = useState(false);
   const params = useParams();
 
   const id = params.id;
@@ -21,6 +24,21 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     });
   }, [id]);
   console.log('Details:', details);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+  };
+
+  const handleOK = () => {
+    setTimeout(() => {
+      setOpen(false);
+      window.location.reload();
+    }, 2000);
+  };
 
   return (
     <div className="">
@@ -63,6 +81,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       placeholder="input text"
                       aria-label="Search"
                       aria-describedby="button-addon1"
+                      onClick={showModal}
                     />
 
                     <button
@@ -71,9 +90,13 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       id="button-addon1"
                       data-te-ripple-init
                       data-te-ripple-color="light"
+                      onClick={showModal}
                     >
                       コメントを追加
                     </button>
+                    <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
+                      <ModalAddReview handleOK={handleOK} />
+                    </Modal>
                   </div>
                 </div>
                 <TutorReview />

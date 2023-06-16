@@ -176,17 +176,20 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
                         id="rate"
                         name="rate"
                         autoComplete="rate"
-                        value={rate ? rate : ''}
+                        value={rate ? rate : '0'}
                         onChange={(e) => {
-                          e.target.value == '' ? setRate(undefined) : setRate(e.target.value);
+                          setRate(e.target.value);
                         }}
                         className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600  sm:text-base sm:leading-6"
                       >
-                        <option value="" disabled selected>
+                        {/* <option value="" disabled selected>
                           --並べ替え--
-                        </option>
-                        <option value="desc">最も高い</option>
-                        <option value="asc">最も低い</option>
+                        </option> */}
+                        <option value="0">すべて</option>
+                        <option value="1">1-2</option>
+                        <option value="2">2-3</option>
+                        <option value="3">3-4</option>
+                        <option value="4">4-5</option>
                       </select>
                     </div>
                   </div>
