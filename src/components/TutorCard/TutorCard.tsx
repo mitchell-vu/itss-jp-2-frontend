@@ -1,10 +1,9 @@
+import { Rate } from 'antd';
 import classNames from 'classnames';
-import { AiOutlineStar } from 'react-icons/ai';
 import { pushNotification } from '../../common/notification';
 import { NOTIFICATION_TYPE } from '../../const/notification';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
-import { Rate } from 'antd';
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
@@ -16,9 +15,13 @@ function TutorCard(props: FixMeLater) {
   return (
     <div className="mt-8 max-w-sm overflow-hidden rounded bg-white p-8 shadow-2xl">
       <div className={classNames(styles['card'])}>
-      <div className=" relative h-40 w-40   sm:mb-0 mb-3">
-						<img src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg" alt="aji" className=" w-40 h-40 object-cover rounded-2xl"/>
-						{/* <a href="#"
+        <div className=" relative mb-3 h-40   w-40 sm:mb-0">
+          <img
+            src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg"
+            alt="aji"
+            className=" h-40 w-40 rounded-2xl object-cover"
+          />
+          {/* <a href="#"
 							className="absolute -right-2 bottom-2   -ml-3  text-white p-1 text-xs bg-green-400 hover:bg-green-500 font-medium tracking-wider rounded-full transition ease-in duration-300">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
 								className="h-4 w-4">
@@ -27,10 +30,10 @@ function TutorCard(props: FixMeLater) {
 								</path>
 							</svg>
 						</a> */}
-					</div>
-        <h3 className="text-3xl mt-3 font-semibold">{details.name}</h3>
+        </div>
+        <h3 className="mt-3 text-3xl font-semibold">{details.name}</h3>
         <div className={classNames(styles.star, 'flex')}>
-          <Rate allowHalf disabled defaultValue={2.5} style={{color: "#ea580c"}}/>
+          <Rate allowHalf disabled defaultValue={2.5} style={{ color: '#ea580c' }} />
         </div>
       </div>
       <div>
