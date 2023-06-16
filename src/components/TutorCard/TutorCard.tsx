@@ -10,7 +10,7 @@ function TutorCard(props: FixMeLater) {
   console.log('details2:', details);
 
   const handleRequest = () => {
-    pushNotification('Success', 'リクエストは教師からの返答を待っています。', NOTIFICATION_TYPE.SUCCESS);
+    pushNotification('Success', 'リクエストは教師による承認待ちです。', NOTIFICATION_TYPE.SUCCESS);
   };
   return (
     <div className="mt-8 max-w-sm overflow-hidden rounded bg-white p-8 shadow-2xl">

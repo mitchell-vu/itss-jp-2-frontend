@@ -1,4 +1,4 @@
-import {Button, DatePicker, Form, Input, Rate, Select} from "antd";
+import {Rate} from "antd";
 import React, { useState } from "react";
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
@@ -35,6 +35,7 @@ const ModalAddReview = (props: any) => {
             }
         }
         console.log(value, textareaValue)
+        handleOK()
         // createNewUser({
         //     ...value,
         //     dateOfBirth: ISO_dateOfBirth,
@@ -61,7 +62,7 @@ const ModalAddReview = (props: any) => {
                 <div className="flex flex-col items-center py-6 space-y-3">
                 <span className="text-base text-slate-600 font-semibold">講師の質はどうですか？</span>
                 <div className="flex space-x-3">
-                    <Rate tooltips={desc} onChange={setValue} value={value} />
+                    <Rate tooltips={desc} onChange={setValue} value={value} style={{ color: '#ef4444', fontSize: 24}}/>
                 </div>
                 </div>
                 <div className="w-3/4 flex flex-col items-center">
