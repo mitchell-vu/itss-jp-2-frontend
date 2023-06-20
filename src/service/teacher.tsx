@@ -21,7 +21,7 @@ function searchTeacher(data?: FixMeLater) {
 }
 
 function getListStudents(data?: FixMeLater) {
-  const response = axios.get(`${domain}/api/teachers/students`, {
+  const response = axios.get(`${domain}/api/teachers/3/students`, {
     params: data,
   });
   return response;

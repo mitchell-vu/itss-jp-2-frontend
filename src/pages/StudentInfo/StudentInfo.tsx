@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getStudentDetail } from '../../service/student';
 import { StudentDetails } from '../../vite-env';
 
@@ -53,10 +53,10 @@ function StudentInfo() {
               説明 :<span className="pl-1 text-4xl font-thin leading-10 text-black"> {details?.description}</span>
             </p>
           </div>
-          {status ? (
+          {status != '0' ? (
             <div className="flex">
-              <button className="m-2 rounded-full bg-blue-500 p-2 text-white">勉強中</button>
-              <button className="m-2 rounded-full bg-red-500 p-2 text-white">リクエスト</button>
+              <button className="m-2 rounded-full bg-blue-500 p-2 text-white">確認</button>
+              <Link to="/teacher-homepage"><button className="m-2 rounded-full bg-red-500 p-2 text-white">キャンセル</button></Link>
             </div>
           ) : (
             <></>
