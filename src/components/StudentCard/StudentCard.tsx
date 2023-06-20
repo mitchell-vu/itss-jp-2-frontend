@@ -5,7 +5,7 @@ function StudentCard(props: FixMeLater) {
   const data = props.data;
   const status = props.status;
   return (
-    <Link to={'/student-info/' + data.student_id+"/"+status}>
+    <Link to={'/student-info/' + data.id_student+"/"+status}>
       <div className="flex flex-col gap-3">
         <div className="h-60 w-full">
           <img

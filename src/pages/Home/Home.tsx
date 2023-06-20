@@ -13,11 +13,11 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
 
   useEffect(() => {
     getListNewTeacher().then((val) => {
-      setDataNew(val.data);
+      setDataNew(val.data.data);
     });
 
     getListTopTeacher().then((val2) => {
-      setDataTop(val2.data);
+      setDataTop(val2.data.data);
     });
   }, []);
 
