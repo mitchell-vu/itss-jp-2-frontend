@@ -12,7 +12,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children }) => {
     <div className="flex flex-col items-stretch">
       <div className="min-h-screen">
         <Header />
-        <main>{children ? children : <Outlet />}</main>
+        <main className="min-h-[calc(100vh-80px)]">{children ? children : <Outlet />}</main>
       </div>
       <Footer />
     </div>

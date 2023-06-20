@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsPatchCheckFill } from 'react-icons/bs';
-import { FiExternalLink, FiMail } from 'react-icons/fi';
+import { FiMail } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 const FEATURES = [
@@ -26,50 +26,46 @@ interface SignUpPageProps {}
 
 const SignUpPage: React.FC<SignUpPageProps> = () => {
   // const navigate = useNavigate();
-  // const [errors, setErrors] = React.useState<string[]>([]);
+  const [errors, setErrors] = React.useState<string[]>([]);
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const confirmedPasswordRef = React.useRef<HTMLInputElement>(null);
 
-  // const signUpWithEmailHandler = (name: string, email: string, password: string) => {
-  //   console.log(name, email, password);
-  // };
+  const validateForm = () => {
+    const e = [];
 
-  // const validateForm = () => {
-  //   const e = [];
+    if (
+      nameRef.current?.value === '' ||
+      emailRef.current?.value === '' ||
+      passwordRef.current?.value === '' ||
+      confirmedPasswordRef.current?.value === ''
+    ) {
+      e.push('Please fill all information');
+    }
+    if (passwordRef.current?.value !== confirmedPasswordRef.current?.value) {
+      e.push('Confirmed password must be matched');
+    }
 
-  //   if (
-  //     nameRef.current?.value === '' ||
-  //     emailRef.current?.value === '' ||
-  //     passwordRef.current?.value === '' ||
-  //     confirmedPasswordRef.current?.value === ''
-  //   ) {
-  //     e.push('Please fill all information');
-  //   }
-  //   if (passwordRef.current?.value !== confirmedPasswordRef.current?.value) {
-  //     e.push('Confirmed password must be matched');
-  //   }
+    console.log(e);
+    if (e.length > 0) {
+      setErrors(e);
+      return false;
+    } else {
+      setErrors([]);
+      return true;
+    }
+  };
 
-  //   console.log(e);
-  //   if (e.length > 0) {
-  //     setErrors(e);
-  //     return false;
-  //   } else {
-  //     setErrors([]);
-  //     return true;
-  //   }
-  // };
-
-  // const signUpHandler = (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     onLogin(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
-  //   }
-  // };
+  const signUpHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      // onLogin(nameRef.current.value, emailRef.current.value, passwordRef.current.value);
+    }
+  };
 
   return (
-    <div className="relative w-screen bg-white dark:bg-black">
+    <div className="relative min-h-[calc(100vh-80px)] w-screen bg-white dark:bg-black">
       <div className="invisible absolute bottom-0 top-0 z-0 h-full w-2/5 border-r border-zinc-200 bg-zinc-50 opacity-75 dark:border-zinc-600 dark:bg-zinc-900 lg:visible"></div>
 
       <div
@@ -82,7 +78,7 @@ const SignUpPage: React.FC<SignUpPageProps> = () => {
               <div className="flex w-full flex-col items-center">
                 <h1 className="mb-8 text-5xl font-semibold leading-tight">Join the best frontend teams</h1>
 
-                {/* {errors?.length > 0 && (
+                {errors?.length > 0 && (
                   <div className="mb-5 w-full rounded-md bg-red-600 p-4 text-white">
                     <ul className="ml-3 list-disc text-sm">
                       {errors.map((error, index) => (
@@ -90,9 +86,9 @@ const SignUpPage: React.FC<SignUpPageProps> = () => {
                       ))}
                     </ul>
                   </div>
-                )} */}
+                )}
 
-                <form className="flex w-full flex-col gap-y-4">
+                <form className="flex w-full flex-col gap-y-4" onSubmit={signUpHandler}>
                   <input
                     ref={nameRef}
                     type="text"
@@ -133,56 +129,23 @@ const SignUpPage: React.FC<SignUpPageProps> = () => {
                   />
 
                   <button
-                    className="flex flex-row items-center rounded-md border border-black bg-black p-3 text-white transition hover:bg-transparent hover:text-black dark:border-white dark:bg-white dark:text-black hover:dark:text-white"
+                    className="flex flex-row items-center rounded-md bg-teal-500 p-3 text-white transition hover:bg-teal-600 dark:border-white dark:bg-white dark:text-black hover:dark:text-white"
                     // onClick={signUpHandler}
                     // disabled={loading}
                   >
                     <FiMail />
                     <div className="mx-auto flex-1">Continue with Email</div>
                   </button>
-
-                  <div className="w-100 flex justify-center">
-                    <div
-                      className="text-primary-600 cursor-pointer hover:underline"
-                      // onClick={onClose}
-                    >
-                      ← Other Sign Up Options
-                    </div>
-                  </div>
                 </form>
               </div>
             </div>
 
-            <p className="w-full leading-7 text-zinc-500">
-              By clicking continue, you agree to our{' '}
-              <a
-                href="/legal/terms"
-                rel="noopener"
-                target="_blank"
-                className="text-black hover:underline dark:text-white"
-              >
-                Terms of Service
-                <FiExternalLink className="mx-1 mb-1 inline-block" />
-              </a>{' '}
-              and{' '}
-              <a
-                href="/legal/privacy-policy"
-                rel="noopener"
-                target="_blank"
-                className="text-black hover:underline dark:text-white"
-              >
-                Privacy Policy
-                <FiExternalLink className="mx-1 mb-1 inline-block" />
-              </a>
-              .
-            </p>
-
             <hr className="my-7 w-full border-zinc-200 dark:border-zinc-800" />
 
             <p className="w-full">
-              Already have an account?{' '}
+              アカウントをお持ちですか？
               <Link to="/login" className="text-primary-600 cursor-pointer hover:underline">
-                Log in
+                ログイン
               </Link>
             </p>
           </div>
