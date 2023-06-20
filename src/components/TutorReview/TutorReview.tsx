@@ -1,17 +1,28 @@
 import { Rate } from 'antd';
+import { useEffect, useState } from 'react';
+import { getStudentDetail } from '../../services/api/student';
+import { CommentInformation } from '../../vite-env';
 
-function TutorReview() {
+interface TutorReviewProps {
+  cmt_detail: CommentInformation;
+}
+
+const TutorReview: React.FC<TutorReviewProps> = ({ cmt_detail }) => {
+  const [name, setName] = useState<string>();
+  useEffect(() => {
+    getStudentDetail(String(cmt_detail.id_student)).then((student) => {
+      setName(student.data.name);
+    });
+  }, [cmt_detail.id_student]);
   return (
     <div className="mb-5">
       <div className="flex">
-        <Rate allowHalf disabled defaultValue={4} style={{ color: '#ea580c', fontSize: 12 }} />
+        <Rate allowHalf disabled defaultValue={cmt_detail.star} style={{ color: '#ea580c', fontSize: 13 }} />
       </div>
-      <div className="review_content">
-        とても献身的で熱心な先生たち。どの講義もとても面白くてためになり、先生と一緒に勉強してから、私はかなり上達しました。
-      </div>
-      <div className="review_owner text-black-300 text-base font-semibold">-from DuanCong</div>
+      <div className="review_content">{cmt_detail.comment}</div>
+      <div className="review_owner text-black-300 text-sm font-semibold">--- {name} ---</div>
     </div>
   );
-}
+};
 
 export default TutorReview;

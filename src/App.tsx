@@ -19,10 +19,10 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="" element={<HomePage />} />
-          <Route path="tutorInfo/:id" element={<TutorInfo />} />
-          <Route path="list-teacher" element={<ListTeacherPage />} />
+          <Route path="student/:student_id/list-teacher" element={<ListTeacherPage />} />
           <Route path="search-teacher" element={<SearchPage />} />
           <Route path="teacher-homepage" element={<TeacherHomePage />} />
+          <Route path="tutorInfo/:id" element={<TutorInfo />} />
           <Route path="student-info/:student_id/:status" element={<StudentInfo />} />
 
           <Route path="auth">

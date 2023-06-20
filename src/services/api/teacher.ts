@@ -23,7 +23,7 @@ export const searchTeacher = (params?: FixMeLater) =>
 export const getListStudents = (params?: FixMeLater) =>
   publicApi({
     method: 'GET',
-    url: `/teachers/${3}/students`,
+    url: `/teachers/${23}/students`,
     params,
   });
 

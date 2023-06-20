@@ -40,6 +40,30 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     }, 2000);
   };
 
+  function addCommasToNumber(number: number) {
+    // Chuyển số thành chuỗi
+    const strNumber = number.toString();
+
+    // Tách phần nguyên và phần thập phân (nếu có)
+    const parts = strNumber.split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts.length > 1 ? '.' + parts[1] : '';
+
+    // Thêm dấu phẩy vào phần nguyên
+    let formattedNumber = '';
+    let count = 0;
+    for (let i = integerPart.length - 1; i >= 0; i--) {
+      count++;
+      formattedNumber = integerPart.charAt(i) + formattedNumber;
+      if (count % 3 === 0 && i !== 0) {
+        formattedNumber = ',' + formattedNumber;
+      }
+    }
+
+    // Kết hợp phần nguyên và phần thập phân (nếu có)
+    return formattedNumber + decimalPart;
+  }
+
   return (
     <div className="">
       {details && (
@@ -64,7 +88,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>授業料</div>
-              <p className={classNames(styles.info, 'col-span-5')}>{details.fee}K/1時間</p>
+              <p className={classNames(styles.info, 'col-span-5')}>{addCommasToNumber(details.fee)} $</p>
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>教育レベル</div>
@@ -99,8 +123,9 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                     </Modal>
                   </div>
                 </div>
-                <TutorReview />
-                <TutorReview />
+                {details.comments.map((comment) => (
+                  <TutorReview key={comment['id']} cmt_detail={comment} />
+                ))}
               </div>
             </div>
           </div>

@@ -16,7 +16,8 @@ export interface TutorInformation {
   fee: number;
   request: number;
   total_comments: number;
-  rate: number;
+  rate?: string;
+  comments_avg_star?: string;
   comments: FixMeLater[];
 }
 
@@ -29,4 +30,11 @@ export interface StudentDetails {
   address: string | null;
   description: string;
   academic_level?: number;
+}
+export interface CommentInformation {
+  id: number;
+  id_student: number;
+  id_teacher: number;
+  comment: string;
+  star: number;
 }
