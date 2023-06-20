@@ -8,16 +8,15 @@ interface TeacherItemProps {
 }
 
 const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
-
-  function addCommasToNumber(number:number) {
+  function addCommasToNumber(number: number) {
     // Chuyển số thành chuỗi
-    let strNumber = number.toString();
-  
+    const strNumber = number.toString();
+
     // Tách phần nguyên và phần thập phân (nếu có)
-    let parts = strNumber.split('.');
-    let integerPart = parts[0];
-    let decimalPart = parts.length > 1 ? '.' + parts[1] : '';
-  
+    const parts = strNumber.split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts.length > 1 ? '.' + parts[1] : '';
+
     // Thêm dấu phẩy vào phần nguyên
     let formattedNumber = '';
     let count = 0;
@@ -28,11 +27,11 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
         formattedNumber = ',' + formattedNumber;
       }
     }
-  
+
     // Kết hợp phần nguyên và phần thập phân (nếu có)
     return formattedNumber + decimalPart;
   }
-  const rate = data.rate ? data.rate: data.comments_avg_star
+  const rate = data.rate ? data.rate : data.comments_avg_star;
 
   return (
     <Link to={'/tutorInfo/' + data['id_teacher']}>
@@ -80,7 +79,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
 
               {/* <div className="mt-2 border-t border-gray-200 pt-3">{data['description']}</div> */}
 
-              <div className="mt-2 grid grid-cols-2 text-sm grid-rows-1 gap-3 border-b border-t border-gray-200 pb-3 pt-3">
+              <div className="mt-2 grid grid-cols-2 grid-rows-1 gap-3 border-b border-t border-gray-200 pb-3 pt-3 text-sm">
                 <p className="flex items-center justify-start text-gray-800 xl:flex-row xl:items-center">
                   <svg
                     className="mr-3 inline-block h-5 w-5 fill-current text-gray-800 xl:h-4 xl:w-4"
@@ -102,7 +101,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
                   >
                     <path d="M437.332 80H74.668C51.199 80 32 99.198 32 122.667v266.666C32 412.802 51.199 432 74.668 432h362.664C460.801 432 480 412.802 480 389.333V122.667C480 99.198 460.801 80 437.332 80zM432 170.667L256 288 80 170.667V128l176 117.333L432 128v42.667z" />
                   </svg>
-                  <span className="line-clamp-1 mt-0"> {data['email']} </span>
+                  <span className="mt-0 line-clamp-1"> {data['email']} </span>
                 </p>
               </div>
             </div>

@@ -22,7 +22,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     getTeacherDetail(String(id)).then((teacher) => {
       setDetails(teacher.data.data);
     });
-  }, []);
+  }, [id]);
   console.log('Details:', details);
 
   const showModal = () => {
@@ -40,15 +40,15 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     }, 2000);
   };
 
-  function addCommasToNumber(number:number) {
+  function addCommasToNumber(number: number) {
     // Chuyển số thành chuỗi
-    let strNumber = number.toString();
-  
+    const strNumber = number.toString();
+
     // Tách phần nguyên và phần thập phân (nếu có)
-    let parts = strNumber.split('.');
-    let integerPart = parts[0];
-    let decimalPart = parts.length > 1 ? '.' + parts[1] : '';
-  
+    const parts = strNumber.split('.');
+    const integerPart = parts[0];
+    const decimalPart = parts.length > 1 ? '.' + parts[1] : '';
+
     // Thêm dấu phẩy vào phần nguyên
     let formattedNumber = '';
     let count = 0;
@@ -59,7 +59,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
         formattedNumber = ',' + formattedNumber;
       }
     }
-  
+
     // Kết hợp phần nguyên và phần thập phân (nếu có)
     return formattedNumber + decimalPart;
   }
@@ -123,9 +123,9 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                     </Modal>
                   </div>
                 </div>
-                {details.comments.map((comment) => <TutorReview key={comment['id']} cmt_detail={comment} />)
-
-                }
+                {details.comments.map((comment) => (
+                  <TutorReview key={comment['id']} cmt_detail={comment} />
+                ))}
               </div>
             </div>
           </div>

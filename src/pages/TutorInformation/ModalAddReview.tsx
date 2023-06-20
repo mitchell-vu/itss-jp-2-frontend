@@ -1,5 +1,7 @@
 import { Rate } from 'antd';
 import React, { useState } from 'react';
+import { sendCommentAndRate } from '../../services/api/comment';
+import { toastError, toastSuccess } from '../../utils/toast';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
@@ -19,37 +21,36 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
   };
 
   const handleSubmitForm = () => {
-    if (textareaValue.length >= 50 && value > 0) {
+    if (textareaValue.length >= 10 && value > 0) {
       setVisible(false);
       setMessage('');
+      sendCommentAndRate({
+        id_teacher: 23, // fix cứng id_teacher = 23
+        id_student: 1,
+        review: textareaValue,
+        star: value,
+      })
+        .then(() => {
+          toastSuccess('レビューを正常に送信しました。');
+          handleOK();
+        })
+        .catch(() => {
+          toastError('レビューの送信に失敗しました。');
+          handleOK();
+        });
     } else {
       if (value == 0 && textareaValue.length < 50) {
         setVisible(true);
-        setMessage('コメントは 50 文字以上で、スターの数は 0 より大きいです。');
+        setMessage('コメントは 10 文字以上で、スターの数は 0 より大きいです。');
       } else if (value == 0) {
         setVisible(true);
         setMessage('スターの数は 0 より大きいです。');
       } else {
         setVisible(true);
-        setMessage('コメントは 50 文字以上です。');
+        setMessage('コメントは 10 文字以上です。');
       }
     }
-    console.log(value, textareaValue);
-    handleOK();
-    // createNewUser({
-    //     ...value,
-    //     dateOfBirth: ISO_dateOfBirth,
-    //     password: AES.encrypt(value.password, process.env.REACT_APP_ENCODE_PWD_KEY!).toString()
-    // })
-    //     .then((res) => {
-    //         pushNotification("Thành công", "Bạn vừa tạo thành công một người dùng mới", NOTIFICATION_TYPE.SUCCESS);
-    //         handleOK()
-    //     })
-    //     .catch((_) => {
-    //         pushNotification("Thất bại", "Thất bại", NOTIFICATION_TYPE.ERROR);
-    //         handleOK()
-    //         return;
-    //     })
+    // console.log(value, textareaValue);
   };
 
   return (

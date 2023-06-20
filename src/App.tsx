@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import Layout from './components/Layout/Layout';
+import Layout from './components/layout/Layout';
 import { HomePage, ListTeacherPage, LoginPage, SearchPage, SignUpPage } from './pages';
 import StudentInfo from './pages/StudentInfo/StudentInfo';
 import TeacherHomePage from './pages/TeacherHomePage/TeacherHomePage';
@@ -19,10 +19,10 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route path="" element={<HomePage />} />
-          <Route path="tutorInfo/:id" element={<TutorInfo />} />
-          <Route path="list-teacher" element={<ListTeacherPage />} />
+          <Route path="student/:student_id/list-teacher" element={<ListTeacherPage />} />
           <Route path="search-teacher" element={<SearchPage />} />
           <Route path="teacher-homepage" element={<TeacherHomePage />} />
+          <Route path="tutorInfo/:id" element={<TutorInfo />} />
           <Route path="student-info/:student_id/:status" element={<StudentInfo />} />
 
           <Route path="auth">
