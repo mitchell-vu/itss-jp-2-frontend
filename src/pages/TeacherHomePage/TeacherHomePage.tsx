@@ -2,14 +2,11 @@ import React, { useEffect } from 'react';
 import StudentCard from '../../components/StudentCard/StudentCard';
 import { getListStudents } from '../../services/api/teacher';
 
-interface DataType {
-  status: number | undefined;
-}
-
 function TeacherHomePage() {
   const [status, setStatus] = React.useState(0);
   const [teachingData, setTeachingData] = React.useState<[]>([]);
   const [requestedData, setRequestedData] = React.useState<[]>([]);
+
   useEffect(() => {
     getListStudents().then((response) => {
       setTeachingData(response.data.data.is_teaching);
@@ -23,6 +20,7 @@ function TeacherHomePage() {
     setStatus(0);
   };
   console.log(teachingData);
+
   return (
     <div className="container">
       <div className="flex">
@@ -36,16 +34,12 @@ function TeacherHomePage() {
       <div className="grid grid-cols-3 gap-4">
         {status == 0 ? (
           teachingData ? (
-            teachingData.map((item) => {
-              return <StudentCard data={item} status={status} />;
-            })
+            teachingData.map((item) => <StudentCard data={item} status={status} />)
           ) : (
             <p>学生がない。</p>
           )
         ) : requestedData ? (
-          requestedData.map((item) => {
-            return <StudentCard data={item} status={status} />;
-          })
+          requestedData.map((item) => <StudentCard data={item} status={status} />)
         ) : (
           <p>学生がない。</p>
         )}

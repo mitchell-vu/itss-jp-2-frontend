@@ -1,11 +1,15 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FixMeLater } from '../../vite-env';
 
-function StudentCard(props: FixMeLater) {
-  const data = props.data;
-  const status = props.status;
+interface StudentCardProps {
+  data: FixMeLater;
+  status: number;
+}
+
+const StudentCard: React.FC<StudentCardProps> = ({ data, status }) => {
   return (
-    <Link to={'/student-info/' + data.id_student+"/"+status}>
+    <Link to={`/student-info/${data.id_student}/${status}`}>
       <div className="flex flex-col gap-3">
         <div className="h-60 w-full">
           <img
@@ -44,6 +48,6 @@ function StudentCard(props: FixMeLater) {
       </div>
     </Link>
   );
-}
+};
 
 export default StudentCard;
