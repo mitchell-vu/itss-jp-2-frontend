@@ -19,3 +19,14 @@ export interface TutorInformation {
   rate: number;
   comments: FixMeLater[];
 }
+
+export interface StudentDetails {
+  id_student: number;
+  name: string;
+  age: number;
+  email: string;
+  phone: string;
+  address: string | null;
+  description: string;
+  academic_level?: number;
+}

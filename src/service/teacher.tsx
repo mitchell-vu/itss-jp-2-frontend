@@ -20,9 +20,16 @@ function searchTeacher(data?: FixMeLater) {
   return response;
 }
 
+function getListStudents(data?: FixMeLater) {
+  const response = axios.get(`${domain}/api/teachers/students`, {
+    params: data,
+  });
+  return response;
+}
+
 function getTeacherDetail(_id: string) {
   const response = axios.get(`${domain}/api/teachers/${_id}`);
   return response;
 }
 
-export { getListNewTeacher, getListTopTeacher, getTeacherDetail, searchTeacher };
+export { getListNewTeacher, getListTopTeacher, getTeacherDetail, searchTeacher, getListStudents };
