@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import StudentCard from '../../components/StudentCard/StudentCard';
-import { getListStudents } from '../../service/teacher';
+import { getListStudents } from '../../services/api/teacher';
 
 interface DataType {
   status: number | undefined;

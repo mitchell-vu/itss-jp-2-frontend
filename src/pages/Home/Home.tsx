@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TeacherItem from '../../components/TeacherItem/TeacherItem';
-import { getListNewTeacher, getListTopTeacher } from '../../service/teacher';
+import { getListNewTeacher, getListTopTeacher } from '../../services/api/teacher';
 import styles from './Home.module.scss';
 
 interface HomePageProps {}
@@ -15,7 +15,6 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
     getListNewTeacher().then((val) => {
       setDataNew(val.data.data);
     });
-
     getListTopTeacher().then((val2) => {
       setDataTop(val2.data.data);
     });
@@ -37,14 +36,14 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
         <section className="my-14">
           <h2 className={classNames(styles.title, 'mb-10 text-5xl')}>今月の先生</h2>
           <div className="grid grid-cols-3 gap-4">
-            {dataNew ? dataNew.map((data) => <TeacherItem key={data['id_teacher']} data={data} />) : <></>}
+            {dataNew && dataNew.map((data) => <TeacherItem key={data['id_teacher']} data={data} />)}
           </div>
         </section>
 
         <section className="my-14">
           <h2 className={classNames(styles.title, 'mb-10 text-5xl')}>新しい先生</h2>
           <div className="grid grid-cols-3 gap-4">
-            {dataTop ? dataTop.map((data) => <TeacherItem key={data['id_teacher']} data={data} />) : <></>}
+            {dataTop && dataTop.map((data) => <TeacherItem key={data['id_teacher']} data={data} />)}
           </div>
         </section>
       </div>

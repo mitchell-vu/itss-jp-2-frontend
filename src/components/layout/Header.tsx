@@ -1,12 +1,14 @@
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
+import { FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../providers/AuthProvider';
 
 interface HeaderProps {}
 
 const Header: React.FunctionComponent<HeaderProps> = () => {
-  const isLoggedin = false;
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <header className="sticky left-0 top-0 z-20 bg-white">
@@ -15,19 +17,16 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
           バナナ先生
         </Link>
         <div className="flex flex-row gap-6">
-          {isLoggedin ? (
+          {isLoggedIn ? (
             <>
-              <Link to="/search-teacher" className="flex rounded-lg bg-red-500 p-3 text-white">
+              <Link
+                to="/search-teacher"
+                className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
+              >
                 先生を検索
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <FiArrowRight />
               </Link>
-              <div id="profile" className="">
+              <div id="profile">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white text-sm font-semibold text-gray-900">
@@ -91,21 +90,19 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                         </Menu.Item>
                       </div>
                       <div className="py-1">
-                        <form method="POST" action="#">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                type="submit"
-                                className={classNames(
-                                  active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                  'block w-full px-4 py-2 text-left text-sm',
-                                )}
-                              >
-                                Sign out
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </form>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={logout}
+                              className={classNames(
+                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                'block w-full px-4 py-2 text-left text-sm',
+                              )}
+                            >
+                              Sign out
+                            </button>
+                          )}
+                        </Menu.Item>
                       </div>
                     </Menu.Items>
                   </Transition>
@@ -116,7 +113,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
             <>
               <Link
                 to="/auth/login"
-                className="mr-2 rounded-lg bg-teal-500 p-3 py-2 text-base font-medium text-white hover:bg-teal-600 dark:text-gray-500 dark:hover:bg-gray-400 lg:px-5 lg:py-2.5"
+                className="mr-2 rounded-lg bg-teal-500 p-3 py-2 text-base font-medium text-white hover:bg-teal-600 lg:px-5 lg:py-2.5"
               >
                 ログイン
               </Link>

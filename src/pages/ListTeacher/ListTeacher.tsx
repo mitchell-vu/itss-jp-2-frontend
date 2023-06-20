@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import TeacherItem from '../../components/TeacherItem/TeacherItem';
-import { getListNewTeacher } from '../../service/teacher';
+import { getListNewTeacher } from '../../services/api/teacher';
 import styles from './ListTeacher.module.scss';
 
 interface ListTeacherPageProps {}
@@ -11,7 +11,7 @@ const ListTeacherPage: React.FunctionComponent<ListTeacherPageProps> = () => {
 
   useEffect(() => {
     getListNewTeacher().then((val) => {
-      setDataNew(val.data);
+      setDataNew(val.data.data);
     });
   }, []);
 
