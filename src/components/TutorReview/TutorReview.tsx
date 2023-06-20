@@ -13,7 +13,7 @@ const TutorReview: React.FC<TutorReviewProps> = ({ cmt_detail }) => {
     getStudentDetail(String(cmt_detail.id_student)).then((student) => {
       setName(student.data.name);
     });
-  }, []);
+  }, [cmt_detail.id_student]);
   return (
     <div className="mb-5">
       <div className="flex">
