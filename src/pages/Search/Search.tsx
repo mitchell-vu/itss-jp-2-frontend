@@ -37,8 +37,8 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
 
   useEffect(() => {
     searchTeacher(search).then((val) => {
-      setDataSource(val.data.data);
-      setTotal(val.data.total);
+      setDataSource(val.data.data.data);
+      setTotal(val.data.data.total);
       setCurrent(1);
       // console.log(val.data.data);
     });
@@ -48,8 +48,8 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     setCurrent(page);
     const search2 = { ...search, page: page };
     searchTeacher(search2).then((val) => {
-      setDataSource(val.data.data);
-      setTotal(val.data.total);
+      setDataSource(val.data.data.data);
+      setTotal(val.data.data.total);
     });
     setTimeout(() => {
       window.scrollTo(0, 0); // Di chuyển lên đầu trang

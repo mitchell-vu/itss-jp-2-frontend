@@ -11,7 +11,7 @@ const ListTeacherPage: React.FunctionComponent<ListTeacherPageProps> = () => {
 
   useEffect(() => {
     getListNewTeacher().then((val) => {
-      setDataNew(val.data);
+      setDataNew(val.data.data);
     });
   }, []);
 

@@ -15,7 +15,7 @@ function TutorCard(props: FixMeLater) {
   return (
     <div className="mt-8 max-w-sm overflow-hidden rounded bg-white p-8 shadow-2xl">
       <div className={classNames(styles['card'])}>
-        <div className=" relative mb-3 h-40   w-40 sm:mb-0">
+        <div className=" relative mb-3 h-40 w-40 sm:mb-0">
           <img
             src="https://iowacapitaldispatch.com/wp-content/uploads/2023/03/math-teacher-at-blackboard-1024x680.jpg"
             alt="aji"
@@ -33,7 +33,7 @@ function TutorCard(props: FixMeLater) {
         </div>
         <h3 className="mt-3 text-3xl font-semibold">{details.name}</h3>
         <div className={classNames(styles.star, 'flex')}>
-          <Rate allowHalf disabled defaultValue={2.5} style={{ color: '#ea580c' }} />
+          <Rate allowHalf disabled defaultValue={parseFloat(details.rate)} style={{ color: '#ea580c' }} />
         </div>
       </div>
       <div>
