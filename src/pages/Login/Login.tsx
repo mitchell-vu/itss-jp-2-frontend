@@ -15,7 +15,6 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const validateForm = () => {
     const e: string[] = [];
     const email = emailRef.current?.value;
@@ -29,7 +28,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     }
 
     if (email && !validateEmail(email)) {
-      e.push('無効な電子メール');
+      // e.push('無効な電子メール');
     }
 
     if (e.length > 0) {
@@ -43,17 +42,17 @@ const LoginPage: React.FC<LoginPageProps> = () => {
 
   const loginHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    // if (validateForm()) {
-    try {
-      const res = await loginWithEmail({ username: emailRef.current!.value, password: passwordRef.current!.value });
-      const { access_token, expires_in, user } = res.data;
-      toastSuccess('ログインに成功しました');
-      login(access_token, expires_in, user);
-      navigate('/');
-    } catch (_e) {
-      toastError('ログインに失敗しました');
+    if (validateForm()) {
+      try {
+        const res = await loginWithEmail({ username: emailRef.current!.value, password: passwordRef.current!.value });
+        const { access_token, expires_in, user } = res.data;
+        toastSuccess('ログインに成功しました');
+        login(access_token, expires_in, user);
+        navigate('/');
+      } catch (_e) {
+        toastError('ログインに失敗しました');
+      }
     }
-    // }
   };
 
   return (
