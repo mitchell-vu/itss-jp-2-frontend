@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TutorCard from '../../components/TutorCard/TutorCard';
 import TutorReview from '../../components/TutorReview/TutorReview';
-import { getTeacherDetail } from '../../service/teacher';
+import { getTeacherDetail } from '../../services/api/teacher';
 import { TutorInformation } from '../../vite-env';
 import ModalAddReview from './ModalAddReview';
 import styles from './TutorInfo.module.scss';
@@ -20,7 +20,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
 
   useEffect(() => {
     getTeacherDetail(String(id)).then((teacher) => {
-      setDetails(teacher.data);
+      setDetails(teacher.data.data);
     });
   }, [id]);
   console.log('Details:', details);

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { FixMeLater } from '../vite-env';
 
 const domain = 'https://banana-sensei-production-b2aa.up.railway.app';
 
@@ -8,4 +7,4 @@ function getStudentDetail(_id: string) {
   return response;
 }
 
-export {getStudentDetail};
+export { getStudentDetail };

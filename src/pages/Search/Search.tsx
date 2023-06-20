@@ -2,7 +2,7 @@ import type { PaginationProps } from 'antd';
 import { Pagination } from 'antd';
 import React, { useEffect, useState } from 'react';
 import TeacherItem from '../../components/TeacherItem/TeacherItem';
-import { searchTeacher } from '../../service/teacher';
+import { searchTeacher } from '../../services/api/teacher';
 
 interface SearchPageProps {}
 
@@ -37,10 +37,9 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
 
   useEffect(() => {
     searchTeacher(search).then((val) => {
-      setDataSource(val.data.data);
-      setTotal(val.data.total);
+      setDataSource(val.data.data.data.data);
+      setTotal(val.data.data.total);
       setCurrent(1);
-      // console.log(val.data.data);
     });
   }, [search]);
 
@@ -48,8 +47,8 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     setCurrent(page);
     const search2 = { ...search, page: page };
     searchTeacher(search2).then((val) => {
-      setDataSource(val.data.data);
-      setTotal(val.data.total);
+      setDataSource(val.data.data.data.data);
+      setTotal(val.data.data.total);
     });
     setTimeout(() => {
       window.scrollTo(0, 0); // Di chuyển lên đầu trang

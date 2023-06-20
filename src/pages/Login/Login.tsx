@@ -1,26 +1,34 @@
 import * as React from 'react';
 import { FiMail } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../providers/AuthProvider';
+import { loginWithEmail } from '../../services/api/auth';
+import { validateEmail } from '../../utils/helpers';
+import { toastError, toastSuccess } from '../../utils/toast';
 
 interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
-  // const navigate = useNavigate();
-  // const [loginWithEmail, setLoginWithEmail] = React.useState(false);
-
-  // const loginWithEmailHandler = (email: string, password: string) => {
-  //   console.log(email, password);
-  // };
-
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [errors, setErrors] = React.useState<string[]>([]);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
 
   const validateForm = () => {
     const e: string[] = [];
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
 
-    if (emailRef.current?.value === '' || passwordRef.current?.value === '') {
-      e.push('Please fill all information');
+    if (email === '') {
+      e.push('メールを入力する必要があります');
+    }
+    if (password === '') {
+      e.push('パスワードを入力する必要があります');
+    }
+
+    if (email && !validateEmail(email)) {
+      // e.push('無効な電子メール');
     }
 
     if (e.length > 0) {
@@ -32,10 +40,18 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     return true;
   };
 
-  const loginHandler = (e: React.FormEvent) => {
+  const loginHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // onLogin(emailRef.current.value, passwordRef.current.value);
+      try {
+        const res = await loginWithEmail({ username: emailRef.current!.value, password: passwordRef.current!.value });
+        const { access_token, expires_in, user } = res.data;
+        toastSuccess('ログインに成功しました');
+        login(access_token, expires_in, user);
+        navigate('/');
+      } catch (_e) {
+        toastError('ログインに失敗しました');
+      }
     }
   };
 

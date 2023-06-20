@@ -1,7 +1,6 @@
 import { Rate } from 'antd';
 import classNames from 'classnames';
-import { pushNotification } from '../../common/notification';
-import { NOTIFICATION_TYPE } from '../../const/notification';
+import { toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
 
@@ -10,8 +9,9 @@ function TutorCard(props: FixMeLater) {
   console.log('details2:', details);
 
   const handleRequest = () => {
-    pushNotification('Success', 'リクエストは教師による承認待ちです。', NOTIFICATION_TYPE.SUCCESS);
+    toastSuccess('リクエストは教師による承認待ちです。');
   };
+
   return (
     <div className="mt-8 max-w-sm overflow-hidden rounded bg-white p-8 shadow-2xl">
       <div className={classNames(styles['card'])}>

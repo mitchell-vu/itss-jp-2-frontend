@@ -56,7 +56,9 @@ function StudentInfo() {
           {status != '0' ? (
             <div className="flex">
               <button className="m-2 rounded-full bg-blue-500 p-2 text-white">確認</button>
-              <Link to="/teacher-homepage"><button className="m-2 rounded-full bg-red-500 p-2 text-white">キャンセル</button></Link>
+              <Link to="/teacher-homepage">
+                <button className="m-2 rounded-full bg-red-500 p-2 text-white">キャンセル</button>
+              </Link>
             </div>
           ) : (
             <></>
