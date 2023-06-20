@@ -95,7 +95,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
 
                 <button
                   className="flex flex-row items-center rounded-md border bg-teal-500 p-3 text-white transition disabled:opacity-50"
-                  // onClick={loginHandler}
+                  onClick={loginHandler}
                   // disabled={loading}
                 >
                   <FiMail />

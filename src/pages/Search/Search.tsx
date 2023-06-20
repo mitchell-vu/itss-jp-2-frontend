@@ -37,7 +37,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
 
   useEffect(() => {
     searchTeacher(search).then((val) => {
-      setDataSource(val.data.data.data.data);
+      setDataSource(val.data.data.data);
       setTotal(val.data.data.total);
       setCurrent(1);
     });
@@ -47,7 +47,7 @@ const SearchPage: React.FunctionComponent<SearchPageProps> = () => {
     setCurrent(page);
     const search2 = { ...search, page: page };
     searchTeacher(search2).then((val) => {
-      setDataSource(val.data.data.data.data);
+      setDataSource(val.data.data.data);
       setTotal(val.data.data.total);
     });
     setTimeout(() => {
