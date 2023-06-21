@@ -4,8 +4,12 @@ import { default as Token } from '../utils/token';
 let logoutTimer: number;
 
 interface User {
-  id: number;
-  name: string;
+  id_user: number;
+  username: string;
+  status?: 1 | 0;
+  image_url?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 interface AuthContextProps {
@@ -17,7 +21,7 @@ interface AuthContextProps {
 }
 
 export const AuthContext = React.createContext<AuthContextProps>({
-  user: { id: 1, name: 'Mitchell Vu' },
+  user: { id_user: 1, username: 'Mitchell Vu' },
   token: '',
   isLoggedIn: false,
   login: () => null,

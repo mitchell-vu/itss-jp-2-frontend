@@ -1,6 +1,7 @@
 import { Rate } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
+import { useAuth } from '../../providers/AuthProvider';
 import { sendRequest } from '../../services/api/request';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
@@ -8,13 +9,13 @@ import styles from './TutorCard.module.scss';
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
-  // console.log('details2:', details);
   const [cancelBtn, setCancelBtn] = useState<boolean>(false);
+  const { user } = useAuth();
 
   const handleRequest = () => {
     sendRequest({
-      id_teacher: 23, // fix cứng id_teacher = 23
-      id_student: 1,
+      id_teacher: details.id_teacher,
+      id_student: user?.id_user,
     })
       .then(() => {
         toastSuccess('リクエストは教師による承認待ちです。');

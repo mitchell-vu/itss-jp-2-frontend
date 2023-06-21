@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getStudentDetail } from '../../services/api/student';
@@ -72,17 +71,16 @@ const StudentInfo: React.FC = () => {
   };
 
   return (
-    <div className={classNames('container')}>
+    <div className="container mt-8">
       <h1 className="text-3xl">講師の情報</h1>
-      <div className={classNames('container grid grid-cols-7')}>
-        <div className="col-span-2 mr-2">
+      <div className="my-6 flex flex-row gap-6">
+        <div className="flex-[2]">
           <img
             src="https://motto-jp.com/media/wp-content/uploads/2020/07/AdobeStock_257074046.jpeg"
-            alt=""
-            className=""
+            className="rounded-lg"
           />
         </div>
-        <div className={classNames(' col-span-4 mt-8')}>
+        <div className="flex-[5]">
           <div>
             <p className="text-black-900 text-xl font-semibold leading-10">
               名前 :<span className="pl-1 text-xl font-extralight leading-10 text-black"> {details?.name}</span>
@@ -113,20 +111,23 @@ const StudentInfo: React.FC = () => {
               説明 :<span className="pl-1 text-xl font-thin leading-10 text-black"> {details?.description}</span>
             </p>
           </div>
-          {status === '0' ? (
-            <div className="flex">
-              <button onClick={handleConfirm} className="m-2 rounded-full bg-blue-500 p-2 text-white">
-                確認
+
+          <div className="mt-3 flex gap-2">
+            {status === '0' ? (
+              <>
+                <button onClick={handleConfirm} className="rounded-full bg-blue-500 px-6 py-2 font-bold text-white">
+                  確認
+                </button>
+                <button onClick={handleCancel} className="rounded-full bg-red-500 px-6 py-2 font-bold text-white">
+                  キャンセル
+                </button>
+              </>
+            ) : (
+              <button onClick={handleFinishCourse} className="rounded-full bg-gray-500 px-6 py-2 font-bold text-white">
+                終わり
               </button>
-              <button onClick={handleCancel} className="m-2 rounded-full bg-red-500 p-2 text-white">
-                キャンセル
-              </button>
-            </div>
-          ) : (
-            <button onClick={handleFinishCourse} className="m-2 rounded-full bg-gray-500 p-2 text-white">
-              終わり
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

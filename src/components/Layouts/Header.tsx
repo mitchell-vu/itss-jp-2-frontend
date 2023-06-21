@@ -2,13 +2,19 @@ import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../providers/AuthProvider';
 
 interface HeaderProps {}
 
 const Header: React.FunctionComponent<HeaderProps> = () => {
+  const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header className="sticky left-0 top-0 z-20 bg-white">
@@ -80,7 +86,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={logout}
+                              onClick={handleLogout}
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block w-full px-4 py-2 text-left text-sm',

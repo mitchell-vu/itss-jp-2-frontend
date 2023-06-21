@@ -1,26 +1,29 @@
 import cn from 'classnames';
 import React, { useEffect } from 'react';
 import StudentCard from '../../components/StudentCard/StudentCard';
+import { useAuth } from '../../providers/AuthProvider';
 import { getListStudents } from '../../services/api/teacher';
 
 const TeacherHomePage: React.FC = () => {
+  const { user } = useAuth();
   const [status, setStatus] = React.useState(1);
   const [teachingData, setTeachingData] = React.useState<[]>([]);
   const [requestedData, setRequestedData] = React.useState<[]>([]);
 
   useEffect(() => {
-    getListStudents().then((response) => {
-      setTeachingData(response.data.data.is_teaching);
-      setRequestedData(response.data.data.requested);
-    });
-  }, [status]);
+    user?.id_user &&
+      getListStudents(user.id_user).then((response) => {
+        setTeachingData(response.data.data.is_teaching);
+        setRequestedData(response.data.data.requested);
+      });
+  }, [user?.id_user]);
+
   const handleClickRequest = () => {
     setStatus(0);
   };
   const handleClickStudying = () => {
     setStatus(1);
   };
-  console.log(teachingData);
 
   return (
     <div className="container">

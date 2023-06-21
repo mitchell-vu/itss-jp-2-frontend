@@ -1,5 +1,6 @@
 import { Rate } from 'antd';
 import React, { useState } from 'react';
+import { useAuth } from '../../providers/AuthProvider';
 import { sendCommentAndRate } from '../../services/api/comment';
 import { toastError, toastSuccess } from '../../utils/toast';
 
@@ -16,6 +17,9 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
   const [textareaValue, setTextareaValue] = useState('');
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('コメントは 50 文字以上で、スターの数は 0 より大きいです。');
+  const { user } = useAuth();
+
+  console.log(user);
 
   const handleTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(event.target.value);
@@ -26,9 +30,10 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
       setVisible(false);
       setMessage('');
       teacher_id &&
+        user?.id_user &&
         sendCommentAndRate({
           id_teacher: parseInt(teacher_id),
-          id_student: 1,
+          id_student: user.id_user,
           review: textareaValue,
           star: value,
         })
@@ -52,7 +57,6 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
         setMessage('コメントは 10 文字以上です。');
       }
     }
-    // console.log(value, textareaValue);
   };
 
   return (

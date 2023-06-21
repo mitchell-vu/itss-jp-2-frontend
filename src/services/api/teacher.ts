@@ -21,10 +21,10 @@ export const searchTeacher = (params?: FixMeLater) =>
     params,
   });
 
-export const getListStudents = (params?: FixMeLater) =>
+export const getListStudents = (id: number, params?: FixMeLater) =>
   publicApi({
     method: 'GET',
-    url: `/teachers/${23}/students`,
+    url: `/teachers/${id}/students`,
     params,
   });
 
