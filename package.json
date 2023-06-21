@@ -36,6 +36,12 @@
       "npm run lint",
       "npm run prettier",
       "git add -A"
+    ],
+    "*.ts": [
+      "npm run lint:write",
+      "npm run lint",
+      "npm run prettier",
+      "git add -A"
     ]
   },
   "devDependencies": {
