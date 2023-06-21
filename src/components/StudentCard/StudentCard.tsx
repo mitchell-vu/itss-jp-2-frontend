@@ -9,7 +9,7 @@ interface StudentCardProps {
 
 const StudentCard: React.FC<StudentCardProps> = ({ data, status }) => {
   return (
-    <Link to={`/student-info/${data.id_student}/${status}`}>
+    <Link to={`/students/${data.id_student}/${status}`}>
       <div className="flex flex-col gap-3">
         <div className="h-60 w-full">
           <img

@@ -119,7 +119,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       コメントを追加
                     </button>
                     <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
-                      <ModalAddReview handleOK={handleOK} teacher_id={id}/>
+                      <ModalAddReview handleOK={handleOK} teacher_id={id} />
                     </Modal>
                   </div>
                 </div>

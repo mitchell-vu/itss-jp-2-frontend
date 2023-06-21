@@ -26,20 +26,20 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
       setVisible(false);
       setMessage('');
       teacher_id &&
-      sendCommentAndRate({
-        id_teacher: parseInt(teacher_id), 
-        id_student: 1,
-        review: textareaValue,
-        star: value,
-      })
-        .then(() => {
-          toastSuccess('レビューを正常に送信しました。');
-          handleOK();
+        sendCommentAndRate({
+          id_teacher: parseInt(teacher_id),
+          id_student: 1,
+          review: textareaValue,
+          star: value,
         })
-        .catch(() => {
-          toastError('レビューの送信に失敗しました。');
-          handleOK();
-        });
+          .then(() => {
+            toastSuccess('レビューを正常に送信しました。');
+            handleOK();
+          })
+          .catch(() => {
+            toastError('レビューの送信に失敗しました。');
+            handleOK();
+          });
     } else {
       if (value == 0 && textareaValue.length < 50) {
         setVisible(true);

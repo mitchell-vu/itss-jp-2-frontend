@@ -53,7 +53,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
           <h2 className="text-4xl font-bold">似合う先生を探そう</h2>
           <div className="my-10 flex flex-row gap-3">
             <Link
-              to="/search-teacher"
+              to="/teachers/search"
               className="justify-content flex rounded-lg bg-red-500 px-16 py-3 text-xl text-white"
             >
               検索

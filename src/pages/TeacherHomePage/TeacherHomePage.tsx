@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import StudentCard from '../../components/StudentCard/StudentCard';
 import { getListStudents } from '../../services/api/teacher';
 
-function TeacherHomePage() {
+const TeacherHomePage: React.FC = () => {
   const [status, setStatus] = React.useState(0);
   const [teachingData, setTeachingData] = React.useState<[]>([]);
   const [requestedData, setRequestedData] = React.useState<[]>([]);
@@ -46,6 +46,6 @@ function TeacherHomePage() {
       </div>
     </div>
   );
-}
+};
 
 export default TeacherHomePage;

@@ -34,7 +34,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
   const rate = data.rate ? data.rate : data.comments_avg_star;
 
   return (
-    <Link to={'/tutorInfo/' + data['id_teacher']}>
+    <Link to={`/teachers/${data.id_teacher}`}>
       <div className="relative mx-auto w-full max-w-sm pt-6">
         <div className="rounded-lg">
           <div className="relative flex h-60 justify-center overflow-hidden rounded-lg">

@@ -1,10 +1,10 @@
 import { Rate } from 'antd';
 import classNames from 'classnames';
+import { useState } from 'react';
+import { sendRequest } from '../../services/api/request';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
-import { sendRequest } from '../../services/api/request';
-import { useState } from 'react';
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
@@ -21,12 +21,10 @@ function TutorCard(props: FixMeLater) {
         setTimeout(() => {
           setCancelBtn(true);
         }, 1500);
-        
       })
       .catch(() => {
         toastError('レビューの送信に失敗しました。');
       });
-    
   };
 
   return (
@@ -61,14 +59,13 @@ function TutorCard(props: FixMeLater) {
         <div className={classNames(styles.title, 'mt-2')}>電話番号</div>
         <p className={classNames(styles.info)}>{details['phone'] ? details['phone'] : 'なし'}</p>
         <div className="mt-5 flex items-center">
-          {cancelBtn ?
-            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white">
-              キャンセル
-            </button> :
+          {cancelBtn ? (
+            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white">キャンセル</button>
+          ) : (
             <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
-            要求
-          </button>
-          }
+              要求
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
           {isLoggedIn ? (
             <>
               <Link
-                to="/search-teacher"
+                to="/teachers/search"
                 className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
               >
                 先生を検索

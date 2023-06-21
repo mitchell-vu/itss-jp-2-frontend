@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getStudentDetail } from '../../services/api/student';
 import { StudentDetails } from '../../vite-env';
 
-function StudentInfo() {
+const StudentInfo: React.FC = () => {
   const [details, setDetails] = useState<StudentDetails>();
   const params = useParams();
 
@@ -63,7 +63,7 @@ function StudentInfo() {
           {status != '0' ? (
             <div className="flex">
               <button className="m-2 rounded-full bg-blue-500 p-2 text-white">確認</button>
-              <Link to="/teacher-homepage">
+              <Link to="/teachers/home">
                 <button className="m-2 rounded-full bg-red-500 p-2 text-white">キャンセル</button>
               </Link>
             </div>
@@ -74,6 +74,6 @@ function StudentInfo() {
       </div>
     </div>
   );
-}
+};
 
 export default StudentInfo;
