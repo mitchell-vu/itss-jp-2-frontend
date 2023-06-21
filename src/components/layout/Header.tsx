@@ -51,41 +51,28 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="student/1/list-teacher"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block px-4 py-2 text-sm',
                               )}
                             >
-                              Account settings
-                            </a>
+                              View List Teacher
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="teacher-homepage"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block px-4 py-2 text-sm',
                               )}
                             >
-                              Support
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm',
-                              )}
-                            >
-                              License
-                            </a>
+                              Teacher HomePage
+                            </Link>
                           )}
                         </Menu.Item>
                       </div>

@@ -37,7 +37,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     setTimeout(() => {
       setOpen(false);
       window.location.reload();
-    }, 2000);
+    }, 1000);
   };
 
   function addCommasToNumber(number: number) {
@@ -119,7 +119,7 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
                       コメントを追加
                     </button>
                     <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
-                      <ModalAddReview handleOK={handleOK} />
+                      <ModalAddReview handleOK={handleOK} teacher_id={id}/>
                     </Modal>
                   </div>
                 </div>

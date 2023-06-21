@@ -1,15 +1,32 @@
 import { Rate } from 'antd';
 import classNames from 'classnames';
-import { toastSuccess } from '../../utils/toast';
+import { toastError, toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
+import { sendRequest } from '../../services/api/request';
+import { useState } from 'react';
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
-  console.log('details2:', details);
+  // console.log('details2:', details);
+  const [cancelBtn, setCancelBtn] = useState<boolean>(false);
 
   const handleRequest = () => {
-    toastSuccess('リクエストは教師による承認待ちです。');
+    sendRequest({
+      id_teacher: 23, // fix cứng id_teacher = 23
+      id_student: 1,
+    })
+      .then(() => {
+        toastSuccess('リクエストは教師による承認待ちです。');
+        setTimeout(() => {
+          setCancelBtn(true);
+        }, 1500);
+        
+      })
+      .catch(() => {
+        toastError('レビューの送信に失敗しました。');
+      });
+    
   };
 
   return (
@@ -44,9 +61,14 @@ function TutorCard(props: FixMeLater) {
         <div className={classNames(styles.title, 'mt-2')}>電話番号</div>
         <p className={classNames(styles.info)}>{details['phone'] ? details['phone'] : 'なし'}</p>
         <div className="mt-5 flex items-center">
-          <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-xl text-white" onClick={handleRequest}>
+          {cancelBtn ?
+            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white">
+              キャンセル
+            </button> :
+            <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
             要求
           </button>
+          }
         </div>
       </div>
     </div>

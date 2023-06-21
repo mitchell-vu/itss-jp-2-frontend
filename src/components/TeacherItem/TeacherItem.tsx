@@ -50,11 +50,11 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
                 <Rate allowHalf disabled defaultValue={rate ? parseFloat(rate) : 0} style={{ color: '#ea580c' }} />
               </div>
             </div>
-            {data.experience_year && data.experience_year >= 7 && (
+            {/* {data.experience_year && data.experience_year >= 7 && (
               <span className="absolute left-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-red-500 px-3 py-2 text-sm font-medium text-white">
                 勉強中{' '}
               </span>
-            )}
+            )} */}
           </div>
 
           <div className="">

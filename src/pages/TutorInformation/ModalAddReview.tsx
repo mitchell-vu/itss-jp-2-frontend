@@ -7,10 +7,11 @@ const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
 interface ModalAddReviewProps {
   handleOK: () => void;
+  teacher_id?: string;
 }
 
 const ModalAddReview = (props: ModalAddReviewProps) => {
-  const { handleOK } = props;
+  const { handleOK, teacher_id } = props;
   const [value, setValue] = useState(0);
   const [textareaValue, setTextareaValue] = useState('');
   const [visible, setVisible] = useState(false);
@@ -24,8 +25,9 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
     if (textareaValue.length >= 10 && value > 0) {
       setVisible(false);
       setMessage('');
+      teacher_id &&
       sendCommentAndRate({
-        id_teacher: 23, // fix cứng id_teacher = 23
+        id_teacher: parseInt(teacher_id), 
         id_student: 1,
         review: textareaValue,
         star: value,
