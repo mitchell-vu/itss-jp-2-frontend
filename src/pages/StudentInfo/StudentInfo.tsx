@@ -10,11 +10,14 @@ function StudentInfo() {
 
   const id = params.student_id;
   const status = params.status;
+
   useEffect(() => {
-    getStudentDetail(String(id)).then((student) => {
-      setDetails(student.data);
-    });
+    id &&
+      getStudentDetail(id.toString()).then((student) => {
+        setDetails(student.data);
+      });
   }, [id]);
+
   return (
     <div className={classNames('container')}>
       <h1 className="text-3xl">講師の情報</h1>
