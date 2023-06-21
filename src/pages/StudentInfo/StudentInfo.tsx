@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getStudentDetail } from '../../services/api/student';
+import { toastSuccess } from '../../utils/toast';
 import { StudentDetails } from '../../vite-env';
 
 const StudentInfo: React.FC = () => {
   const [details, setDetails] = useState<StudentDetails>();
+  const navigate = useNavigate();
   const params = useParams();
 
   const id = params.student_id;
@@ -17,6 +19,15 @@ const StudentInfo: React.FC = () => {
         setDetails(student.data);
       });
   }, [id]);
+
+  const handleConfirm = () => {
+    toastSuccess('承認が成功しました！');
+  };
+
+  const handleCancel = () => {
+    toastSuccess('キャンセルしました！');
+    navigate('/');
+  };
 
   return (
     <div className={classNames('container')}>
@@ -60,15 +71,17 @@ const StudentInfo: React.FC = () => {
               説明 :<span className="pl-1 text-xl font-thin leading-10 text-black"> {details?.description}</span>
             </p>
           </div>
-          {status != '0' ? (
+          {status !== '0' ? (
             <div className="flex">
-              <button className="m-2 rounded-full bg-blue-500 p-2 text-white">確認</button>
-              <Link to="/teachers/home">
-                <button className="m-2 rounded-full bg-red-500 p-2 text-white">キャンセル</button>
-              </Link>
+              <button onClick={handleConfirm} className="m-2 rounded-full bg-blue-500 p-2 text-white">
+                確認
+              </button>
+              <button onClick={handleCancel} className="m-2 rounded-full bg-red-500 p-2 text-white">
+                キャンセル
+              </button>
             </div>
           ) : (
-            <></>
+            <button className="m-2 rounded-full bg-gray-500 p-2 text-white">終わり</button>
           )}
         </div>
       </div>

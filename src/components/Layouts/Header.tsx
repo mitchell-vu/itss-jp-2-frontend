@@ -52,7 +52,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="student/1/list-teacher"
+                              to="/students/1/list-teacher"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block px-4 py-2 text-sm',
@@ -65,7 +65,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="teacher-homepage"
+                              to="/teachers/home"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                 'block px-4 py-2 text-sm',
