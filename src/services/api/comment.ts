@@ -1,8 +1,8 @@
 import { FixMeLater } from '../../vite-env';
-import publicApi from '../config/publicApi.config';
+import authApi from '../config/authApi.config';
 
 export const sendCommentAndRate = (data: FixMeLater) =>
-  publicApi({
+  authApi({
     method: 'POST',
     url: '/auth/comments',
     data,
