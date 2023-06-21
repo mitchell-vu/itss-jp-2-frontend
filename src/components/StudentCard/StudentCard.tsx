@@ -13,7 +13,7 @@ const StudentCard: React.FC<StudentCardProps> = ({ data, status }) => {
       <div className="flex flex-col gap-3">
         <div className="h-60 w-full">
           <img
-            src="https://img.lovepik.com/free-png/20220126/lovepik-junior-high-school-student-image-png-image_401807387_wh860.png"
+            src="https://motto-jp.com/media/wp-content/uploads/2020/07/AdobeStock_257074046.jpeg"
             alt="Student"
             className="h-full w-full rounded-lg object-cover"
           />

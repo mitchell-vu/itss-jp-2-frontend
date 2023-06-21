@@ -6,7 +6,7 @@ export const toastWithAsyncFetch = async (
   messages: { loading: string; success: string; error: string },
   fetchFunc: () => Promise<AxiosResponse>,
   successCallback: (res: AxiosResponse) => void,
-  errorCallback: (e: unknown) => void,
+  errorCallback?: (e: unknown) => void,
 ) => {
   const toastId = toast.loading(messages.loading ?? 'Đang cập nhật');
 

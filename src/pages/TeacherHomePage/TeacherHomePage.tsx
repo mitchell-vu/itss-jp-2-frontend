@@ -1,9 +1,10 @@
+import cn from 'classnames';
 import React, { useEffect } from 'react';
 import StudentCard from '../../components/StudentCard/StudentCard';
 import { getListStudents } from '../../services/api/teacher';
 
 const TeacherHomePage: React.FC = () => {
-  const [status, setStatus] = React.useState(0);
+  const [status, setStatus] = React.useState(1);
   const [teachingData, setTeachingData] = React.useState<[]>([]);
   const [requestedData, setRequestedData] = React.useState<[]>([]);
 
@@ -13,36 +14,43 @@ const TeacherHomePage: React.FC = () => {
       setRequestedData(response.data.data.requested);
     });
   }, [status]);
-  const handleClickButton1 = () => {
-    setStatus(1);
-  };
-  const handleClickButton2 = () => {
+  const handleClickRequest = () => {
     setStatus(0);
+  };
+  const handleClickStudying = () => {
+    setStatus(1);
   };
   console.log(teachingData);
 
   return (
     <div className="container">
       <div className="flex">
-        <button className="m-2 rounded-full bg-blue-500 p-2 text-white" onClick={handleClickButton2}>
+        <button
+          className={cn('m-2 rounded-full bg-gray-500 p-2 text-white', { '!bg-teal-500': status === 1 })}
+          onClick={handleClickStudying}
+        >
           勉強中
         </button>
-        <button className="m-2 rounded-full bg-blue-500 p-2 text-white" onClick={handleClickButton1}>
+        <button
+          className={cn('m-2 rounded-full bg-gray-500 p-2 text-white', { '!bg-teal-500': status === 0 })}
+          onClick={handleClickRequest}
+        >
           リクエスト
         </button>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {status == 0 ? (
-          teachingData ? (
+        {status === 0 &&
+          (teachingData?.length > 0 ? (
             teachingData.map((item) => <StudentCard data={item} status={status} />)
           ) : (
             <p>学生がない。</p>
-          )
-        ) : requestedData ? (
-          requestedData.map((item) => <StudentCard data={item} status={status} />)
-        ) : (
-          <p>学生がない。</p>
-        )}
+          ))}
+        {status === 1 &&
+          (requestedData?.length > 0 ? (
+            requestedData.map((item) => <StudentCard data={item} status={status} />)
+          ) : (
+            <p>学生がない。</p>
+          ))}
       </div>
     </div>
   );

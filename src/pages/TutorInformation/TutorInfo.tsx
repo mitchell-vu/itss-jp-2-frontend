@@ -23,7 +23,6 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
       setDetails(teacher.data.data);
     });
   }, [id]);
-  console.log('Details:', details);
 
   const showModal = () => {
     setOpen(true);
@@ -33,11 +32,10 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
     setOpen(false);
   };
 
-  const handleOK = () => {
-    setTimeout(() => {
-      setOpen(false);
-      window.location.reload();
-    }, 1000);
+  const handleOK = async () => {
+    const res = await getTeacherDetail(String(id));
+    setDetails(res.data.data);
+    setOpen(false);
   };
 
   function addCommasToNumber(number: number) {

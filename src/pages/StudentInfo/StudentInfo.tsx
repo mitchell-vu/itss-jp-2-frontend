@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getStudentDetail } from '../../services/api/student';
-import { toastSuccess } from '../../utils/toast';
+import { approveRequest, finishCourse } from '../../services/api/teacher';
+import { toastWithAsyncFetch } from '../../utils/toast';
 import { StudentDetails } from '../../vite-env';
 
 const StudentInfo: React.FC = () => {
@@ -21,12 +22,53 @@ const StudentInfo: React.FC = () => {
   }, [id]);
 
   const handleConfirm = () => {
-    toastSuccess('承認が成功しました！');
+    if (!id) return;
+
+    toastWithAsyncFetch(
+      {
+        loading: '承認中...',
+        success: '承認が成功しました！',
+        error: '承認が失敗しました！',
+      },
+      () => approveRequest(id, 'accepted'),
+      (res) => {
+        console.log(res);
+      },
+    );
   };
 
   const handleCancel = () => {
-    toastSuccess('キャンセルしました！');
-    navigate('/');
+    if (!id) return;
+
+    toastWithAsyncFetch(
+      {
+        loading: 'キャンセル中...',
+        success: 'キャンセルしました！',
+        error: 'キャンセルするが失敗しました！',
+      },
+      () => approveRequest(id, 'cancelled'),
+      (res) => {
+        navigate('/');
+        console.log(res);
+      },
+    );
+  };
+
+  const handleFinishCourse = () => {
+    if (!id) return;
+
+    toastWithAsyncFetch(
+      {
+        loading: 'キャンセル中...',
+        success: 'キャンセルしました！',
+        error: 'キャンセルするが失敗しました！',
+      },
+      () => finishCourse(id),
+      (res) => {
+        navigate('/');
+        console.log(res);
+      },
+    );
   };
 
   return (
@@ -35,7 +77,7 @@ const StudentInfo: React.FC = () => {
       <div className={classNames('container grid grid-cols-7')}>
         <div className="col-span-2 mr-2">
           <img
-            src="https://img.lovepik.com/free-png/20220126/lovepik-junior-high-school-student-image-png-image_401807387_wh860.png"
+            src="https://motto-jp.com/media/wp-content/uploads/2020/07/AdobeStock_257074046.jpeg"
             alt=""
             className=""
           />
@@ -71,7 +113,7 @@ const StudentInfo: React.FC = () => {
               説明 :<span className="pl-1 text-xl font-thin leading-10 text-black"> {details?.description}</span>
             </p>
           </div>
-          {status !== '0' ? (
+          {status === '0' ? (
             <div className="flex">
               <button onClick={handleConfirm} className="m-2 rounded-full bg-blue-500 p-2 text-white">
                 確認
@@ -81,7 +123,9 @@ const StudentInfo: React.FC = () => {
               </button>
             </div>
           ) : (
-            <button className="m-2 rounded-full bg-gray-500 p-2 text-white">終わり</button>
+            <button onClick={handleFinishCourse} className="m-2 rounded-full bg-gray-500 p-2 text-white">
+              終わり
+            </button>
           )}
         </div>
       </div>
