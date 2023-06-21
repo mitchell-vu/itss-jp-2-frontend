@@ -39,13 +39,13 @@ const TeacherHomePage: React.FC = () => {
         </button>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        {status === 0 &&
+        {status === 1 &&
           (teachingData?.length > 0 ? (
             teachingData.map((item) => <StudentCard data={item} status={status} />)
           ) : (
             <p>学生がない。</p>
           ))}
-        {status === 1 &&
+        {status === 0 &&
           (requestedData?.length > 0 ? (
             requestedData.map((item) => <StudentCard data={item} status={status} />)
           ) : (
