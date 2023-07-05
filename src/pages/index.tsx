@@ -1,3 +1,5 @@
+export { default as EditStudentInfo } from './EditStudentInfo/EditStudentInfo';
+export { default as EditTeacherInfoPage } from './EditTeacherInfoPage/EditTeacherInfoPage';
 export { default as HomePage } from './Home/Home';
 export { default as ListTeacherPage } from './ListTeacher/ListTeacher';
 export { default as LoginPage } from './Login/Login';
