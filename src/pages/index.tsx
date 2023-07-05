@@ -5,4 +5,6 @@ export { default as SearchPage } from './Search/Search';
 export { default as SignUpPage } from './SignUp/SignUp';
 export { default as StudentInfo } from './StudentInfo/StudentInfo';
 export { default as TeacherHomePage } from './TeacherHomePage/TeacherHomePage';
+export { default as TutorApprovalPage } from './TutorApprovalPage/TutorApprovalPage';
 export { default as TutorInfo } from './TutorInformation/TutorInfo';
+export { default as UserManagementPage } from './UserManagementPage/UserManagementPage';

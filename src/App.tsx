@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Layout from './components/Layouts/Layout';
 import {
@@ -10,7 +10,9 @@ import {
   SignUpPage,
   StudentInfo,
   TeacherHomePage,
+  TutorApprovalPage,
   TutorInfo,
+  UserManagementPage,
 } from './pages';
 
 const App = () => {
@@ -35,6 +37,12 @@ const App = () => {
           <Route path="students">
             <Route path=":student_id/:status" element={<StudentInfo />} />
             <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
+          </Route>
+
+          <Route path="administration">
+            <Route path="" element={<Navigate to="./user" replace />} />
+            <Route path="user" element={<UserManagementPage />} />
+            <Route path="teacher/:id" element={<TutorApprovalPage />} />
           </Route>
 
           <Route path="auth">
