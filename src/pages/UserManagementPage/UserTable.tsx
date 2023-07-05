@@ -1,7 +1,7 @@
 import { Table, TableProps, Tag } from 'antd';
 import React from 'react';
 import { FiLock, FiTrash } from 'react-icons/fi';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IUserTable } from './UserManagementPage';
 
 const COLUMNS = [
@@ -57,13 +57,17 @@ interface UserTableProps {
 }
 
 const UserTable: React.FC<UserTableProps> = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <Table
       dataSource={data}
       columns={COLUMNS}
       onRow={(user) => ({
-        onClick: () => <Navigate to={`/administration/teacher/${user.id_teacher}`} />,
+        onClick: () => {
+          navigate(`/administration/teacher/${user.id_teacher}`);
+        },
       })}
+      rowClassName="cursor-pointer"
     />
   );
 };

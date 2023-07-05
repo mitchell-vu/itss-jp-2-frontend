@@ -20,6 +20,7 @@ const UserManagementPage: React.FC = () => {
       if (res.status === 200) {
         const data = res.data.data.map((item: TutorInformation) => ({
           key: item.id_teacher,
+          id_teacher: item.id_teacher,
           name: item.name,
           experience_year: item.experience_year,
           email: item.email,
