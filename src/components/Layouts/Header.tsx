@@ -9,7 +9,11 @@ interface HeaderProps {}
 
 const Header: React.FunctionComponent<HeaderProps> = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, logout } = useAuth();
+  const {
+    isLoggedIn,
+    logout,
+    user: { role },
+  } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -25,13 +29,15 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
         <div className="flex flex-row gap-6">
           {isLoggedIn ? (
             <>
-              <Link
-                to="/teachers/search"
-                className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
-              >
-                先生を検索
-                <FiArrowRight />
-              </Link>
+              {role === 0 && (
+                <Link
+                  to="/teachers/search"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
+                >
+                  先生を検索
+                  <FiArrowRight />
+                </Link>
+              )}
               <div id="profile">
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
@@ -68,32 +74,36 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                             </Link>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to="/teachers/home"
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm',
+                        {role === 1 && (
+                          <>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/teachers/home"
+                                  className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm',
+                                  )}
+                                >
+                                  Teacher HomePage
+                                </Link>
                               )}
-                            >
-                              Teacher HomePage
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to="/administration"
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm',
+                            </Menu.Item>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to="/administration"
+                                  className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm',
+                                  )}
+                                >
+                                  Administration
+                                </Link>
                               )}
-                            >
-                              Administration
-                            </Link>
-                          )}
-                        </Menu.Item>
+                            </Menu.Item>
+                          </>
+                        )}
                       </div>
                       <div className="py-1">
                         <Menu.Item>

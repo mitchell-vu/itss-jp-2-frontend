@@ -10,6 +10,7 @@ interface User {
   image_url?: string;
   created_at?: string;
   updated_at?: string;
+  role: number;
 }
 
 interface AuthContextProps {
@@ -21,7 +22,7 @@ interface AuthContextProps {
 }
 
 export const AuthContext = React.createContext<AuthContextProps>({
-  user: { id_user: 1, username: 'Mitchell Vu' },
+  user: { id_user: 1, username: 'Mitchell Vu', role: 0 },
   token: '',
   isLoggedIn: false,
   login: () => null,

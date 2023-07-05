@@ -6,6 +6,7 @@ import {
   HomePage,
   ListTeacherPage,
   LoginPage,
+  ProtectedRoute,
   SearchPage,
   SignUpPage,
   StudentInfo,
@@ -14,9 +15,11 @@ import {
   TutorInfo,
   UserManagementPage,
 } from './pages';
+import { useAuth } from './providers/AuthProvider';
 
 const App = () => {
   const location = useLocation();
+  const { user } = useAuth();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,23 +29,30 @@ const App = () => {
     <>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="" element={<HomePage />} />
-
-          <Route path="teachers">
-            <Route path="search" element={<SearchPage />} />
-            <Route path=":id" element={<TutorInfo />} />
-            <Route path="home" element={<TeacherHomePage />} />
+          <Route element={<ProtectedRoute isAllowed={user?.role === 0} redirectPath="/teachers/home" />}>
+            <Route path="" element={<HomePage />} />
+            <Route path="teachers">
+              <Route path="search" element={<SearchPage />} />
+              <Route path=":id" element={<TutorInfo />} />
+            </Route>
           </Route>
 
-          <Route path="students">
-            <Route path=":student_id/:status" element={<StudentInfo />} />
-            <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
+          <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
+            <Route path="teachers">
+              <Route path="home" element={<TeacherHomePage />} />
+            </Route>
+            <Route path="students">
+              <Route path=":student_id/:status" element={<StudentInfo />} />
+              <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
+            </Route>
           </Route>
 
-          <Route path="administration">
-            <Route path="" element={<Navigate to="./user" replace />} />
-            <Route path="user" element={<UserManagementPage />} />
-            <Route path="teacher/:id" element={<TutorApprovalPage />} />
+          <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
+            <Route path="administration">
+              <Route path="" element={<Navigate to="./user" replace />} />
+              <Route path="user" element={<UserManagementPage />} />
+              <Route path="teacher/:id" element={<TutorApprovalPage />} />
+            </Route>
           </Route>
 
           <Route path="auth">
