@@ -9,11 +9,7 @@ interface HeaderProps {}
 
 const Header: React.FunctionComponent<HeaderProps> = () => {
   const navigate = useNavigate();
-  const {
-    isLoggedIn,
-    logout,
-    user: { role },
-  } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -29,7 +25,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
         <div className="flex flex-row gap-6">
           {isLoggedIn ? (
             <>
-              {role === 0 && (
+              {user?.role === 0 && (
                 <Link
                   to="/teachers/search"
                   className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
@@ -74,7 +70,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                             </Link>
                           )}
                         </Menu.Item>
-                        {role === 1 && (
+                        {user?.role === 1 && (
                           <>
                             <Menu.Item>
                               {({ active }) => (
