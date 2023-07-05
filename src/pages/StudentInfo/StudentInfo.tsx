@@ -31,6 +31,7 @@ const StudentInfo: React.FC = () => {
       },
       () => approveRequest(id, 'accepted'),
       (res) => {
+        navigate(`/students/${id}/1`);
         console.log(res);
       },
     );

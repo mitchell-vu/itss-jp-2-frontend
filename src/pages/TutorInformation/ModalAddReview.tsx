@@ -5,6 +5,19 @@ import { sendCommentAndRate } from '../../services/api/comment';
 import { toastError, toastSuccess } from '../../utils/toast';
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+const badwords = [
+  'ばか',
+  'うざい',
+  'わるがき',
+  'ぶす',
+  'やつ',
+  'ちくしょう',
+  'くそ',
+  'ばかやろう',
+  'しんじまえ',
+  'やりまん',
+  'くたばれ',
+];
 
 interface ModalAddReviewProps {
   handleOK: () => void;
@@ -27,8 +40,18 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
 
   const handleSubmitForm = () => {
     if (textareaValue.length >= 10 && value > 0) {
+      let ok = true;
       setVisible(false);
       setMessage('');
+      badwords.forEach((word) => {
+        if (textareaValue.includes(word)) {
+          setVisible(true);
+          ok = false;
+          setMessage('コメントに悪い言葉が含まれています。');
+        }
+      });
+
+      if (!ok) return;
       teacher_id &&
         user?.id_user &&
         sendCommentAndRate({
@@ -46,7 +69,7 @@ const ModalAddReview = (props: ModalAddReviewProps) => {
             handleOK();
           });
     } else {
-      if (value == 0 && textareaValue.length < 50) {
+      if (value == 0 && textareaValue.length < 10) {
         setVisible(true);
         setMessage('コメントは 10 文字以上で、スターの数は 0 より大きいです。');
       } else if (value == 0) {

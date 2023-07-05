@@ -19,7 +19,7 @@ import { useAuth } from './providers/AuthProvider';
 
 const App = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, isLoggedIn } = useAuth();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,7 +29,7 @@ const App = () => {
     <>
       <Routes>
         <Route element={<Layout />}>
-          <Route element={<ProtectedRoute isAllowed={user?.role === 0} redirectPath="/teachers/home" />}>
+          <Route element={<ProtectedRoute isAllowed={!isLoggedIn || user?.role === 0} redirectPath="/teachers/home" />}>
             <Route path="" element={<HomePage />} />
             <Route path="teachers">
               <Route path="search" element={<SearchPage />} />

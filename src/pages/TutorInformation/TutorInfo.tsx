@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TutorCard from '../../components/TutorCard/TutorCard';
 import TutorReview from '../../components/TutorReview/TutorReview';
+import { useAuth } from '../../providers/AuthProvider';
 import { getTeacherDetail } from '../../services/api/teacher';
 import { TutorInformation } from '../../vite-env';
 import ModalAddReview from './ModalAddReview';
@@ -12,11 +13,10 @@ import styles from './TutorInfo.module.scss';
 interface TutorInfoProps {}
 
 const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
+  const { id } = useParams();
+  const { isLoggedIn } = useAuth();
   const [details, setDetails] = useState<TutorInformation>();
   const [open, setOpen] = useState(false);
-  const params = useParams();
-
-  const id = params.id;
 
   useEffect(() => {
     getTeacherDetail(String(id)).then((teacher) => {
@@ -95,32 +95,35 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>コメント</div>
               <div className={classNames(styles.info, 'col-span-5')}>
-                <div className="mb-3">
-                  <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-                    <input
-                      type="search"
-                      className="focus:shadow-[inset_0_0_0_1px_rgb(204, 0, 0)] relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-red-600 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-red-600 focus:text-neutral-700 focus:outline-none dark:border-red-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-red-600"
-                      placeholder="input text"
-                      aria-label="Search"
-                      aria-describedby="button-addon1"
-                      onClick={showModal}
-                    />
+                {isLoggedIn && (
+                  <div className="mb-3">
+                    <div className="relative mb-4 flex w-full flex-wrap items-stretch">
+                      <input
+                        type="search"
+                        className="focus:shadow-[inset_0_0_0_1px_rgb(204, 0, 0)] relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-red-600 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-red-600 focus:text-neutral-700 focus:outline-none dark:border-red-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-red-600"
+                        placeholder="input text"
+                        aria-label="Search"
+                        aria-describedby="button-addon1"
+                        onClick={showModal}
+                      />
 
-                    <button
-                      className="hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800 relative z-[2] flex items-center rounded-r bg-red-600 px-6 py-2.5 text-sm font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-                      type="button"
-                      id="button-addon1"
-                      data-te-ripple-init
-                      data-te-ripple-color="light"
-                      onClick={showModal}
-                    >
-                      コメントを追加
-                    </button>
-                    <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
-                      <ModalAddReview handleOK={handleOK} teacher_id={id} />
-                    </Modal>
+                      <button
+                        className="hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-800 relative z-[2] flex items-center rounded-r bg-red-600 px-6 py-2.5 text-sm font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                        type="button"
+                        id="button-addon1"
+                        data-te-ripple-init
+                        data-te-ripple-color="light"
+                        onClick={showModal}
+                      >
+                        コメントを追加
+                      </button>
+                      <Modal className="shadow-lg" open={open} onCancel={hideModal} destroyOnClose={true} footer={null}>
+                        <ModalAddReview handleOK={handleOK} teacher_id={id} />
+                      </Modal>
+                    </div>
                   </div>
-                </div>
+                )}
+
                 {details.comments.map((comment) => (
                   <TutorReview key={comment['id']} cmt_detail={comment} />
                 ))}
