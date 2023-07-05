@@ -10,10 +10,11 @@ export interface TutorInformation {
   email: string;
   phone: string;
   gender: number;
-  address: string | null;
+  address: string;
   description: string;
   experience_year?: number;
   fee: number;
+  level_description: string;
   request: number;
   total_comments: number;
   rate?: string;
@@ -27,7 +28,7 @@ export interface StudentDetails {
   age: number;
   email: string;
   phone: string;
-  address: string | null;
+  address: string;
   description: string;
   academic_level?: number;
 }
