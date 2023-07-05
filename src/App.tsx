@@ -35,6 +35,9 @@ const App = () => {
               <Route path="search" element={<SearchPage />} />
               <Route path=":id" element={<TutorInfo />} />
             </Route>
+            <Route path="students">
+              <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
+            </Route>
           </Route>
 
           <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
@@ -43,7 +46,6 @@ const App = () => {
             </Route>
             <Route path="students">
               <Route path=":student_id/:status" element={<StudentInfo />} />
-              <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
             </Route>
           </Route>
 
