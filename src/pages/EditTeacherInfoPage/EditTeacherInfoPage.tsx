@@ -1,13 +1,14 @@
 import axios from 'axios';
 import classNames from 'classnames';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getTeacherDetail } from '../../services/api/teacher';
 import { TutorInformation } from '../../vite-env';
 import styles from './TutorInfoPage.module.scss';
 
 interface EditTeacherInfoPageProps {}
 
-const teacher = {
+const teacher: TutorInformation = {
   id_teacher: 1,
   name: 'Duan',
   age: 21,
@@ -19,6 +20,7 @@ const teacher = {
   experience_year: 4,
   gender: 0,
   fee: 130,
+  level_description: 'Đại học',
   request: 1,
   rate: '5',
   comments_avg_star: '5',
@@ -27,31 +29,25 @@ const teacher = {
 };
 
 const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = () => {
-  const [details, setDetails] = useState<TutorInformation | undefined>(teacher);
+  const [details, setDetails] = useState<TutorInformation>(teacher);
   const params = useParams();
 
   const id = params.id;
 
-  // useEffect(() => {
-  //   getTeacherDetail(String(id)).then((teacher) => {
-  //     setDetails(teacher.data.data);
-  //   });
-  // }, [id]);
+  useEffect(() => {
+    getTeacherDetail(String(id)).then((teacher) => {
+      setDetails(teacher.data.data);
+    });
+  }, [id]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (name === 'experience_year' && value.endsWith(' year')) {
-      const numericValue = value.slice(0, -5); // Loại bỏ chữ " year" từ giá trị
-      setDetails((prevDetails) => ({
-        ...prevDetails,
-        [name]: numericValue,
-      }));
-    } else {
-      setDetails((prevDetails) => ({
-        ...prevDetails,
-        [name]: value,
-      }));
-    }
+    const preDetails = details;
+    const x = {
+      ...preDetails,
+      [name]: value,
+    };
+    setDetails(x);
   };
 
   const handleSubmit = (event: { preventDefault: () => void }, details: TutorInformation) => {
@@ -72,7 +68,12 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
     console.log('hello');
 
     axios
-      .put(`https://banana-sensei-production-b2aa.up.railway.app/api/auth/teachers/${id}`, params)
+      .put(`https://banana-sensei-production.up.railway.app/api/auth/teachers/${id}`, params, {
+        headers: {
+          // token: Cookies.get('token'),
+          Authorization: localStorage.getItem('access-token'),
+        },
+      })
       .then((response) => {
         console.log('Update successful:', response.data);
       })
@@ -174,7 +175,7 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
                   )}
                   type="text"
                   name="experience_year"
-                  value={details.experience_year + ' year'}
+                  value={details.experience_year}
                   onChange={handleChange}
                 />
               </div>
@@ -199,8 +200,8 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
                     'col-span-5 rounded-md border border-orange-300 px-4 py-2 focus:border-orange-500 active:border-orange-500',
                   )}
                   type="number"
-                  name="experience_year"
-                  value={details.experience_year}
+                  name="level_description"
+                  value={details.level_description}
                   onChange={handleChange}
                 />
               </div>

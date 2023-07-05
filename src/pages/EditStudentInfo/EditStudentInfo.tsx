@@ -21,10 +21,14 @@ const EditStudentInfo: React.FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setStudent((prevStudent: StudentDetails | undefined) => ({
-      ...prevStudent,
-      [name]: value,
-    }));
+    if (student !== undefined) {
+      const preDetails = student;
+      const x = {
+        ...preDetails,
+        [name]: value,
+      };
+      setStudent(x);
+    }
   };
 
   const handleSubmit = (event: { preventDefault: () => void }, details: StudentDetails) => {
@@ -42,7 +46,12 @@ const EditStudentInfo: React.FC = () => {
 
     // Gửi request PUT để cập nhật thông tin người dùng
     axios
-      .put(`https://banana-sensei-production-b2aa.up.railway.app/api/auth/students/${id}`, params)
+      .put(`https://banana-sensei-production.up.railway.app/api/auth/students/${id}`, params, {
+        headers: {
+          // token: Cookies.get('token'),
+          Authorization: localStorage.getItem('access-token'),
+        },
+      })
       .then((response) => {
         console.log('Update successful:', response.data);
       })
@@ -112,6 +121,19 @@ const EditStudentInfo: React.FC = () => {
               />
             </div>
             <div className="m-1 flex ">
+              <div className={classNames(styles.title)}>宛先:</div>
+              <input
+                className={classNames(
+                  styles.info,
+                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
+                )}
+                type="text"
+                name="address"
+                value={student?.address}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="m-1 flex ">
               <div className={classNames(styles.title)}>教育レベル:</div>
               <input
                 className={classNames(
@@ -143,7 +165,11 @@ const EditStudentInfo: React.FC = () => {
           <button
             className="focus:shadow-outline rounded-md bg-orange-500 px-6 py-2 text-white hover:bg-orange-400 focus:outline-none"
             type="submit"
-            onClick={(e) => handleSubmit(e, student)}
+            onClick={(e) => {
+              if (student !== undefined) {
+                handleSubmit(e, student);
+              }
+            }}
           >
             保存する
           </button>
