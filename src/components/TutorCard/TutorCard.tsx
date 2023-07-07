@@ -1,4 +1,5 @@
-import { Rate } from 'antd';
+import Rating from '@mui/material/Rating';
+import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useAuth } from '../../providers/AuthProvider';
@@ -6,6 +7,15 @@ import { sendRequest } from '../../services/api/request';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
+
+const StyledRating = styled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#ea580c',
+  },
+  // '& .MuiRating-iconHover': {
+  //   color: '#ff3d47',
+  // },
+});
 
 function TutorCard(props: FixMeLater) {
   const details = props.details;
@@ -18,13 +28,20 @@ function TutorCard(props: FixMeLater) {
       id_student: user?.id_user,
     })
       .then(() => {
-        toastSuccess('リクエストは教師による承認待ちです。');
-        setTimeout(() => {
-          setCancelBtn(true);
-        }, 1500);
+        if (cancelBtn == false) {
+          toastSuccess('リクエストは教師による承認待ちです。');
+          setTimeout(() => {
+            setCancelBtn(true);
+          }, 1000);
+        } else {
+          toastSuccess('リクエストはキャンセルしました。');
+          setTimeout(() => {
+            setCancelBtn(false);
+          }, 1000);
+        }
       })
       .catch(() => {
-        toastError('レビューの送信に失敗しました。');
+        toastError('リクエストの送信に失敗しました。');
       });
   };
 
@@ -39,8 +56,11 @@ function TutorCard(props: FixMeLater) {
           />
         </div>
         <h3 className="mt-3 text-3xl font-semibold">{details.name}</h3>
-        <div className={classNames(styles.star, 'flex')}>
-          <Rate allowHalf disabled defaultValue={parseFloat(details.rate)} style={{ color: '#ea580c' }} />
+        <div className={classNames(styles.star, 'mt-2 flex')}>
+          <StyledRating name="customized-color" defaultValue={parseFloat(details.rate)} precision={0.1} readOnly />
+          <span className="ml-2 text-base font-semibold text-gray-800"> {parseFloat(details.rate).toFixed(1)} </span>
+
+          {/* <Rate allowHalf disabled defaultValue={parseFloat(details.rate)} style={{ color: '#ea580c' }} /> */}
         </div>
       </div>
       <div>
@@ -52,7 +72,9 @@ function TutorCard(props: FixMeLater) {
         <p className={classNames(styles.info)}>{details['phone'] ? details['phone'] : 'なし'}</p>
         <div className="mt-5 flex items-center">
           {cancelBtn ? (
-            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white">キャンセル</button>
+            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white" onClick={handleRequest}>
+              キャンセル
+            </button>
           ) : (
             <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
               要求

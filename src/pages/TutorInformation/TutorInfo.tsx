@@ -82,15 +82,15 @@ const TutorInfo: React.FunctionComponent<TutorInfoProps> = () => {
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>経験年数</div>
-              <p className={classNames(styles.info, 'col-span-5')}>{details.experience_year} year</p>
+              <p className={classNames(styles.info, 'col-span-5')}>{details.experience_year} 年</p>
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>授業料</div>
-              <p className={classNames(styles.info, 'col-span-5')}>{addCommasToNumber(details.fee)} $</p>
+              <p className={classNames(styles.info, 'col-span-5')}>{addCommasToNumber(details.fee)} VND</p>
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>教育レベル</div>
-              <p className={classNames(styles.info, 'col-span-5')}>DH Bach Khoa</p>
+              <p className={classNames(styles.info, 'col-span-5')}>ハノイ工科大学</p>
             </div>
             <div className={classNames(styles.info_container, 'mt-3 grid grid-cols-7')}>
               <div className={classNames(styles.title, 'col-span-2')}>コメント</div>

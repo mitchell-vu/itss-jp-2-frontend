@@ -1,16 +1,16 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import React, { ChangeEvent, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getStudentDetail } from '../../services/api/student';
+import { useAuth } from '../../providers/AuthProvider';
+import { editStudentInfo, getStudentDetail } from '../../services/api/student';
 import { StudentDetails } from '../../vite-env';
 import styles from './EditStudentInfo.module.scss';
 
 const EditStudentInfo: React.FC = () => {
   const [student, setStudent] = React.useState<StudentDetails>();
-  const params = useParams();
+  // const params = useParams();
+  const { user } = useAuth();
 
-  const id = params.student_id;
+  const id = user?.id_user;
 
   useEffect(() => {
     id &&
@@ -21,11 +21,17 @@ const EditStudentInfo: React.FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let new_value;
     if (student !== undefined) {
+      if (name === 'age') {
+        new_value = parseInt(value);
+      } else {
+        new_value = value;
+      }
       const preDetails = student;
       const x = {
         ...preDetails,
-        [name]: value,
+        [name]: new_value,
       };
       setStudent(x);
     }
@@ -44,14 +50,8 @@ const EditStudentInfo: React.FC = () => {
       academic_level: details.academic_level,
     };
 
-    // Gửi request PUT để cập nhật thông tin người dùng
-    axios
-      .put(`https://banana-sensei-production.up.railway.app/api/auth/students/${id}`, params, {
-        headers: {
-          // token: Cookies.get('token'),
-          Authorization: localStorage.getItem('access-token'),
-        },
-      })
+    console.log(details);
+    editStudentInfo(details.id_student, params)
       .then((response) => {
         console.log('Update successful:', response.data);
       })

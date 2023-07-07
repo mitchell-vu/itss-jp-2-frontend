@@ -57,35 +57,52 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to="/students/1/list-teacher"
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm',
-                              )}
-                            >
-                              View List Teacher
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        {user?.role === 1 && (
+                        {user?.role === 0 && (
                           <>
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
-                                  to="/teachers/home"
+                                  to={`/students/${user?.id_user}/list-teacher`}
                                   className={classNames(
                                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                     'block px-4 py-2 text-sm',
                                   )}
                                 >
-                                  Teacher HomePage
+                                  教師一覧を見る
                                 </Link>
                               )}
                             </Menu.Item>
                             <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to={`/students/${user?.id_user}/edit`}
+                                  className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm',
+                                  )}
+                                >
+                                  自分のプロフィール
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          </>
+                        )}
+                        {user?.role === 1 && (
+                          <>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <Link
+                                  to={`/teachers/${user?.id_user}/edit`}
+                                  className={classNames(
+                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                    'block px-4 py-2 text-sm',
+                                  )}
+                                >
+                                  自分のプロフィール
+                                </Link>
+                              )}
+                            </Menu.Item>
+                            {/* <Menu.Item>
                               {({ active }) => (
                                 <Link
                                   to="/administration"
@@ -97,7 +114,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                                   Administration
                                 </Link>
                               )}
-                            </Menu.Item>
+                            </Menu.Item> */}
                           </>
                         )}
                       </div>
@@ -111,7 +128,7 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
                                 'block w-full px-4 py-2 text-left text-sm',
                               )}
                             >
-                              Sign out
+                              ログアウト
                             </button>
                           )}
                         </Menu.Item>

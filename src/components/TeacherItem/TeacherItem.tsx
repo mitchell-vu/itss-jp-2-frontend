@@ -1,4 +1,5 @@
-import { Rate } from 'antd';
+import Rating from '@mui/material/Rating';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TutorInformation } from '../../vite-env';
@@ -6,6 +7,15 @@ import { TutorInformation } from '../../vite-env';
 interface TeacherItemProps {
   data: TutorInformation;
 }
+
+const StyledRating = styled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#ea580c',
+  },
+  // '& .MuiRating-iconHover': {
+  //   color: '#ff3d47',
+  // },
+});
 
 const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
   function addCommasToNumber(number: number) {
@@ -46,8 +56,17 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
             </div>
 
             <div className="absolute bottom-0 mb-3 flex justify-center">
-              <div className="flex space-x-5 overflow-hidden rounded-lg bg-white/70 px-4 py-1 shadow">
-                <Rate allowHalf disabled defaultValue={rate ? parseFloat(rate) : 0} style={{ color: '#ea580c' }} />
+              <div className="flex space-x-2 overflow-hidden rounded-lg bg-white/70 px-4 py-1 shadow">
+                <StyledRating
+                  name="customized-color"
+                  defaultValue={rate ? parseFloat(rate) : 0}
+                  precision={0.1}
+                  readOnly
+                />
+                <span className="text-base font-semibold text-zinc-700">
+                  {' '}
+                  {rate ? parseFloat(rate).toFixed(1) : 0}{' '}
+                </span>
               </div>
             </div>
             {/* {data.experience_year && data.experience_year >= 7 && (
@@ -70,8 +89,8 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ data }) => {
 
               <div className="flex items-center justify-end">
                 <p className="text-primary inline-block whitespace-nowrap rounded-xl font-semibold leading-tight">
-                  <span className="text-sm uppercase"> $ </span>
                   <span className="text-lg">{addCommasToNumber(data['fee'])}</span>
+                  <span className="text-sm uppercase"> VND </span>
                 </p>
               </div>
             </div>

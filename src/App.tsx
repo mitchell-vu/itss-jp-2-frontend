@@ -3,6 +3,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Layout from './components/Layouts/Layout';
 import {
+  EditStudentInfo,
+  EditTeacherInfoPage,
   HomePage,
   ListTeacherPage,
   LoginPage,
@@ -37,18 +39,19 @@ const App = () => {
             </Route>
             <Route path="students">
               <Route path=":student_id/list-teacher" element={<ListTeacherPage />} />
+              <Route path=":student_id/edit" element={<EditStudentInfo />} />
             </Route>
           </Route>
-
+          EditTeacherInfoPage
           <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
             <Route path="teachers">
               <Route path="home" element={<TeacherHomePage />} />
+              <Route path=":teacher_id/edit" element={<EditTeacherInfoPage />} />
             </Route>
             <Route path="students">
               <Route path=":student_id/:status" element={<StudentInfo />} />
             </Route>
           </Route>
-
           <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
             <Route path="administration">
               <Route path="" element={<Navigate to="./user" replace />} />
@@ -56,7 +59,6 @@ const App = () => {
               <Route path="teacher/:id" element={<TutorApprovalPage />} />
             </Route>
           </Route>
-
           <Route path="auth">
             <Route path="login" element={<LoginPage />} />
             <Route path="sign-up" element={<SignUpPage />} />

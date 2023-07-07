@@ -1,7 +1,7 @@
 import axios from 'axios';
 import classNames from 'classnames';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useAuth } from '../../providers/AuthProvider';
 import { getTeacherDetail } from '../../services/api/teacher';
 import { TutorInformation } from '../../vite-env';
 import styles from './TutorInfoPage.module.scss';
@@ -30,9 +30,9 @@ const teacher: TutorInformation = {
 
 const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = () => {
   const [details, setDetails] = useState<TutorInformation>(teacher);
-  const params = useParams();
+  const { user } = useAuth();
 
-  const id = params.id;
+  const id = user?.id_user;
 
   useEffect(() => {
     getTeacherDetail(String(id)).then((teacher) => {
@@ -173,7 +173,7 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
                     styles.info,
                     'col-span-5 rounded-md border border-orange-300 px-4 py-2 focus:border-orange-500 active:border-orange-500',
                   )}
-                  type="text"
+                  type="number"
                   name="experience_year"
                   value={details.experience_year}
                   onChange={handleChange}
@@ -199,9 +199,9 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
                     styles.info,
                     'col-span-5 rounded-md border border-orange-300 px-4 py-2 focus:border-orange-500 active:border-orange-500',
                   )}
-                  type="number"
+                  type="text"
                   name="level_description"
-                  value={details.level_description}
+                  value="ハノイ工科大学"
                   onChange={handleChange}
                 />
               </div>
