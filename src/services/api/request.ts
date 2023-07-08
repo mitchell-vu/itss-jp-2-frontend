@@ -7,3 +7,9 @@ export const sendRequest = (data: FixMeLater) =>
     url: '/auth/requests',
     data,
   });
+
+export const cancelRequest = (id_teacher: number) =>
+  authApi({
+    method: 'PUT',
+    url: `/auth/students/cancel-requests/${id_teacher}`,
+  });

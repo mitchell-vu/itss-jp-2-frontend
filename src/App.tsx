@@ -26,6 +26,7 @@ const App = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+  console.log(user?.role);
 
   return (
     <>
@@ -42,8 +43,7 @@ const App = () => {
               <Route path=":student_id/edit" element={<EditStudentInfo />} />
             </Route>
           </Route>
-          EditTeacherInfoPage
-          <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
+          <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/administration" />}>
             <Route path="teachers">
               <Route path="home" element={<TeacherHomePage />} />
               <Route path=":teacher_id/edit" element={<EditTeacherInfoPage />} />
@@ -52,7 +52,7 @@ const App = () => {
               <Route path=":student_id/:status" element={<StudentInfo />} />
             </Route>
           </Route>
-          <Route element={<ProtectedRoute isAllowed={user?.role === 1} redirectPath="/" />}>
+          <Route element={<ProtectedRoute isAllowed={user?.role === 2} redirectPath="/" />}>
             <Route path="administration">
               <Route path="" element={<Navigate to="./user" replace />} />
               <Route path="user" element={<UserManagementPage />} />

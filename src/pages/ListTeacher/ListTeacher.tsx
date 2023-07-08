@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import TeacherItem from '../../components/TeacherItem/TeacherItem';
-import { getListNewTeacher } from '../../services/api/teacher';
+import { getStudentRequests } from '../../services/api/student';
 import styles from './ListTeacher.module.scss';
 
 interface ListTeacherPageProps {}
@@ -10,7 +10,7 @@ const ListTeacherPage: React.FunctionComponent<ListTeacherPageProps> = () => {
   const [dataNew, setDataNew] = useState<[]>();
 
   useEffect(() => {
-    getListNewTeacher().then((val) => {
+    getStudentRequests().then((val) => {
       setDataNew(val.data.data);
     });
   }, []);

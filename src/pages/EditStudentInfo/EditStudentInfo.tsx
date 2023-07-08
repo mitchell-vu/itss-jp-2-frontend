@@ -15,7 +15,7 @@ const EditStudentInfo: React.FC = () => {
   useEffect(() => {
     id &&
       getStudentDetail(id.toString()).then((student) => {
-        setStudent(student.data);
+        setStudent(student.data.data);
       });
   }, [id]);
 

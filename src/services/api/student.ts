@@ -14,3 +14,9 @@ export const editStudentInfo = (id_student: number, data: FixMeLater) =>
     url: `auth/students/${id_student}`,
     data: { data },
   });
+
+export const getStudentRequests = () =>
+  authApi({
+    method: 'GET',
+    url: `auth/students/requests`,
+  });

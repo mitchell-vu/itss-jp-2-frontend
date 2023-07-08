@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { useAuth } from '../../providers/AuthProvider';
-import { sendRequest } from '../../services/api/request';
+import { cancelRequest, sendRequest } from '../../services/api/request';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { FixMeLater } from '../../vite-env';
 import styles from './TutorCard.module.scss';
@@ -22,23 +22,29 @@ function TutorCard(props: FixMeLater) {
   const [cancelBtn, setCancelBtn] = useState<boolean>(false);
   const { user } = useAuth();
 
+  const cancel = () => {
+    cancelRequest(details.id_teacher)
+      .then(() => {
+        toastSuccess('リクエストはキャンセルしました。');
+        setTimeout(() => {
+          setCancelBtn(false);
+        }, 1000);
+      })
+      .catch(() => {
+        toastError('リクエストの送信に失敗しました。');
+      });
+  };
+
   const handleRequest = () => {
     sendRequest({
       id_teacher: details.id_teacher,
       id_student: user?.id_user,
     })
       .then(() => {
-        if (cancelBtn == false) {
-          toastSuccess('リクエストは教師による承認待ちです。');
-          setTimeout(() => {
-            setCancelBtn(true);
-          }, 1000);
-        } else {
-          toastSuccess('リクエストはキャンセルしました。');
-          setTimeout(() => {
-            setCancelBtn(false);
-          }, 1000);
-        }
+        toastSuccess('リクエストは教師による承認待ちです。');
+        setTimeout(() => {
+          setCancelBtn(true);
+        }, 1000);
       })
       .catch(() => {
         toastError('リクエストの送信に失敗しました。');
@@ -72,7 +78,7 @@ function TutorCard(props: FixMeLater) {
         <p className={classNames(styles.info)}>{details['phone'] ? details['phone'] : 'なし'}</p>
         <div className="mt-5 flex items-center">
           {cancelBtn ? (
-            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white" onClick={handleRequest}>
+            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white" onClick={cancel}>
               キャンセル
             </button>
           ) : (
