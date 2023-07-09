@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { ChangeEvent, useEffect } from 'react';
 import { useAuth } from '../../providers/AuthProvider';
 import { editStudentInfo, getStudentDetail } from '../../services/api/student';
+import { toastError, toastSuccess } from '../../utils/toast';
 import { StudentDetails } from '../../vite-env';
 import styles from './EditStudentInfo.module.scss';
 
@@ -52,11 +53,11 @@ const EditStudentInfo: React.FC = () => {
 
     console.log(details);
     editStudentInfo(params)
-      .then((response) => {
-        console.log('Update successful:', response.data);
+      .then(() => {
+        toastSuccess('情報編集に成功しました');
       })
-      .catch((error) => {
-        console.error('Update failed:', error);
+      .catch(() => {
+        toastError('情報編集に失敗しました');
       });
   };
   return (

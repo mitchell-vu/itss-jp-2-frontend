@@ -46,3 +46,10 @@ export const finishCourse = (id: string) =>
     method: 'POST',
     url: `auth/teachers/${id}/finish-course`,
   });
+
+export const editTeacherInfo = (data: FixMeLater) =>
+  authApi({
+    method: 'PUT',
+    url: `auth/teachers`,
+    data,
+  });

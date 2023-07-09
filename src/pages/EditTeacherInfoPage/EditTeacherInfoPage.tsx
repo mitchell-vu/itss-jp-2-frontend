@@ -1,8 +1,8 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAuth } from '../../providers/AuthProvider';
-import { getTeacherDetail } from '../../services/api/teacher';
+import { editTeacherInfo, getTeacherDetail } from '../../services/api/teacher';
+import { toastError, toastSuccess } from '../../utils/toast';
 import { TutorInformation } from '../../vite-env';
 import styles from './TutorInfoPage.module.scss';
 
@@ -43,9 +43,19 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const preDetails = details;
+    let new_value;
+    if (details !== undefined) {
+      if (name === 'age' || name === 'fee' || name === 'experience_year') {
+        new_value = parseInt(value);
+      } else {
+        new_value = value;
+      }
+    }
+    console.log(value);
+
     const x = {
       ...preDetails,
-      [name]: value,
+      [name]: new_value,
     };
     setDetails(x);
   };
@@ -56,29 +66,24 @@ const EditTeacherInfoPage: React.FunctionComponent<EditTeacherInfoPageProps> = (
     const params = {
       name: details.name,
       age: details.age,
-      address: details.address,
-      phone: details.phone,
-      email: details.email,
-      description: details.description,
-      // level_description: details.level_description,
-      experience_year: details.experience_year,
       gender: details.gender,
+      email: details.email,
+      phone: details.phone,
+      experience_year: details.experience_year,
+      description: details.description,
+      address: details.address,
       fee: details.fee,
+      level_description: details.level_description,
     };
-    console.log('hello');
 
-    axios
-      .put(`https://banana-sensei-production.up.railway.app/api/auth/teachers/${id}`, params, {
-        headers: {
-          // token: Cookies.get('token'),
-          Authorization: localStorage.getItem('access-token'),
-        },
+    console.log(params);
+
+    editTeacherInfo(params)
+      .then(() => {
+        toastSuccess('情報編集に成功しました');
       })
-      .then((response) => {
-        console.log('Update successful:', response.data);
-      })
-      .catch((error) => {
-        console.error('Update failed:', error);
+      .catch(() => {
+        toastError('情報編集に失敗しました');
       });
   };
 
