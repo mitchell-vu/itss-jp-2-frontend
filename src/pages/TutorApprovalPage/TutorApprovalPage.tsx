@@ -1,12 +1,43 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { acceptTeacherRequest, deleteTeacherRequest } from '../../services/api/request';
 import { getTeacherDetail } from '../../services/api/teacher';
+import { toastError, toastSuccess } from '../../utils/toast';
 import { TutorInformation } from '../../vite-env';
 import TutorCard from './TutorCard';
 
 const TutorApprovalPage: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [details, setDetails] = React.useState<TutorInformation>();
+
+  const cancel = () => {
+    id &&
+      deleteTeacherRequest(parseInt(id))
+        .then(() => {
+          toastSuccess('リクエストはキャンセルしました。');
+          setTimeout(() => {
+            navigate(`/administration/user`);
+          }, 1000);
+        })
+        .catch(() => {
+          toastError('リクエストの送信に失敗しました。');
+        });
+  };
+
+  const handle = () => {
+    id &&
+      acceptTeacherRequest(parseInt(id))
+        .then(() => {
+          toastSuccess('承認に成功した。');
+          setTimeout(() => {
+            navigate(`/administration/user`);
+          }, 1000);
+        })
+        .catch(() => {
+          toastError('リクエストの送信に失敗しました。');
+        });
+  };
 
   React.useEffect(() => {
     getTeacherDetail(String(id)).then((teacher) => {
@@ -48,8 +79,12 @@ const TutorApprovalPage: React.FC = () => {
           </div>
 
           <div className="flex gap-2">
-            <button className="rounded bg-teal-500 px-8 py-3 text-white">承認</button>
-            <button className="rounded border px-8 py-3">拒否</button>
+            <button className="rounded bg-teal-500 px-8 py-3 text-white" onClick={handle}>
+              承認
+            </button>
+            <button className="rounded border px-8 py-3" onClick={cancel}>
+              拒否
+            </button>
           </div>
         </div>
       </div>

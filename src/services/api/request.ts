@@ -13,3 +13,15 @@ export const cancelRequest = (id_teacher: number) =>
     method: 'PUT',
     url: `/auth/students/cancel-requests/${id_teacher}`,
   });
+
+export const deleteTeacherRequest = (id_user: number) =>
+  authApi({
+    method: 'DELETE',
+    url: `/auth/user/${id_user}`,
+  });
+
+export const acceptTeacherRequest = (id_user: number) =>
+  authApi({
+    method: 'PUT',
+    url: `/auth/users/${id_user}/role`,
+  });

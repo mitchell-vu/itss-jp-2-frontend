@@ -1,33 +1,41 @@
 import { Tab } from '@headlessui/react';
 import classNames from 'classnames';
 import React from 'react';
-import { getListNewTeacher } from '../../services/api/teacher';
-import { TutorInformation } from '../../vite-env';
-import UserTable from './UserTable';
+import { getAllUser } from '../../services/api/user';
+import { StudentDetails, TutorInformation } from '../../vite-env';
+import StudentTable from './StudentTable';
+import TeacherTable from './TeacherTable';
 
-export interface IUserTable extends TutorInformation {
+export interface ITeacherTable extends TutorInformation {
   key: number;
   status: string;
 }
 
-const TABS = ['家庭教師', '家庭教師'];
+export interface IStudentTable extends StudentDetails {
+  key: number;
+}
+
+const TABS = ['家庭教師', '学習者', '作成リクエスト'];
 
 const UserManagementPage: React.FC = () => {
-  const [users, setUsers] = React.useState<IUserTable[]>([]);
+  const [student, setStudent] = React.useState<[IStudentTable]>();
+  const [teacher, setTeacher] = React.useState<[ITeacherTable]>();
+  const [request, setRequest] = React.useState<[ITeacherTable]>();
 
   React.useEffect(() => {
-    getListNewTeacher().then((res) => {
+    getAllUser().then((res) => {
       if (res.status === 200) {
-        const data = res.data.data.map((item: TutorInformation) => ({
-          key: item.id_teacher,
-          id_teacher: item.id_teacher,
-          name: item.name,
-          experience_year: item.experience_year,
-          email: item.email,
-          phone: item.phone,
+        const data_teacher = res.data.data.teacher.map((item: TutorInformation) => ({
+          ...item,
           status: 'active',
         }));
-        setUsers(data);
+        const data_request = res.data.data.request.map((item: TutorInformation) => ({
+          ...item,
+          status: 'inactive',
+        }));
+        setStudent(res.data.data.student);
+        setTeacher(data_teacher);
+        setRequest(data_request);
       }
     });
   }, []);
@@ -53,11 +61,15 @@ const UserManagementPage: React.FC = () => {
         </Tab.List>
 
         <Tab.Panels className="mt-6">
-          {TABS.map((_, idx) => (
-            <Tab.Panel key={idx} className="rounded-xl bg-white">
-              <UserTable data={users} />
-            </Tab.Panel>
-          ))}
+          <Tab.Panel key={0} className="rounded-xl bg-white">
+            {teacher && <TeacherTable data={teacher} />}
+          </Tab.Panel>
+          <Tab.Panel key={1} className="rounded-xl bg-white">
+            {student && <StudentTable data={student} />}
+          </Tab.Panel>
+          <Tab.Panel key={2} className="rounded-xl bg-white">
+            {request && <TeacherTable data={request} />}
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </div>

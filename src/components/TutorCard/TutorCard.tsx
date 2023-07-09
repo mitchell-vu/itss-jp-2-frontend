@@ -111,7 +111,10 @@ function TutorCard(props: FixMeLater) {
         <h3 className="mt-3 text-3xl font-semibold">{details.name}</h3>
         <div className={classNames(styles.star, 'mt-2 flex')}>
           <StyledRating name="customized-color" defaultValue={parseFloat(details.rate)} precision={0.1} readOnly />
-          <span className="ml-2 text-base font-semibold text-gray-800"> {parseFloat(details.rate).toFixed(1)} </span>
+          <span className="ml-2 text-base font-semibold text-gray-800">
+            {' '}
+            {parseFloat(details.rate || 0).toFixed(1)}{' '}
+          </span>
 
           {/* <Rate allowHalf disabled defaultValue={parseFloat(details.rate)} style={{ color: '#ea580c' }} /> */}
         </div>
