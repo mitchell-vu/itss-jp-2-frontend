@@ -16,7 +16,7 @@ const StudentInfo: React.FC = () => {
   useEffect(() => {
     id &&
       getStudentDetail(id.toString()).then((student) => {
-        setDetails(student.data);
+        setDetails(student.data.data);
       });
   }, [id]);
 
@@ -73,7 +73,7 @@ const StudentInfo: React.FC = () => {
 
   return (
     <div className="container mt-8">
-      <h1 className="text-3xl">講師の情報</h1>
+      <h1 className="text-3xl">学習者の情報</h1>
       <div className="my-6 flex flex-row gap-6">
         <div className="flex-[2]">
           <img
