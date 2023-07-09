@@ -8,11 +8,11 @@ export const getStudentDetail = (id: number | string) =>
     url: `/students/${id}`,
   });
 
-export const editStudentInfo = (id_student: number, data: FixMeLater) =>
+export const editStudentInfo = (data: FixMeLater) =>
   authApi({
     method: 'PUT',
-    url: `auth/students/${id_student}`,
-    data: { data },
+    url: `auth/students`,
+    data,
   });
 
 export const getStudentRequests = () =>

@@ -1,11 +1,12 @@
 import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../providers/AuthProvider';
 import { cancelRequest, sendRequest } from '../../services/api/request';
+import { getStudentRequests } from '../../services/api/student';
 import { toastError, toastSuccess } from '../../utils/toast';
-import { FixMeLater } from '../../vite-env';
+import { FixMeLater, TutorInformation } from '../../vite-env';
 import styles from './TutorCard.module.scss';
 
 const StyledRating = styled(Rating)({
@@ -18,16 +19,26 @@ const StyledRating = styled(Rating)({
 });
 
 function TutorCard(props: FixMeLater) {
+  const [dataClosed, setDataClosed] = useState<[TutorInformation]>();
+  const [dataIsStudying, setDataIsStudying] = useState<[TutorInformation]>();
+  const [dataRequest, setDataRequest] = useState<[TutorInformation]>();
   const details = props.details;
-  const [cancelBtn, setCancelBtn] = useState<boolean>(false);
   const { user } = useAuth();
+
+  useEffect(() => {
+    getStudentRequests().then((val) => {
+      setDataClosed(val.data.data.closed);
+      setDataIsStudying(val.data.data.is_studying);
+      setDataRequest(val.data.data.requested);
+    });
+  }, []);
 
   const cancel = () => {
     cancelRequest(details.id_teacher)
       .then(() => {
         toastSuccess('リクエストはキャンセルしました。');
         setTimeout(() => {
-          setCancelBtn(false);
+          window.location.reload();
         }, 1000);
       })
       .catch(() => {
@@ -43,12 +54,48 @@ function TutorCard(props: FixMeLater) {
       .then(() => {
         toastSuccess('リクエストは教師による承認待ちです。');
         setTimeout(() => {
-          setCancelBtn(true);
+          window.location.reload();
         }, 1000);
       })
       .catch(() => {
         toastError('リクエストの送信に失敗しました。');
       });
+  };
+
+  const showButton = () => {
+    const found_request = dataRequest && dataRequest.find((element) => element.id_teacher === details.id_teacher);
+    const found_study = dataIsStudying && dataIsStudying.find((element) => element.id_teacher === details.id_teacher);
+    const found_close = dataClosed && dataClosed.find((element) => element.id_teacher === details.id_teacher);
+
+    if (found_request) {
+      return (
+        <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white" onClick={cancel}>
+          キャンセル
+        </button>
+      );
+    } else if (found_study) {
+      return (
+        <button
+          className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white"
+          onClick={cancel}
+          disabled={true}
+        >
+          キャンセル
+        </button>
+      );
+    } else if (found_close) {
+      return (
+        <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
+          再要求
+        </button>
+      );
+    } else {
+      return (
+        <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
+          要求
+        </button>
+      );
+    }
   };
 
   return (
@@ -76,17 +123,7 @@ function TutorCard(props: FixMeLater) {
         <p className={classNames(styles.info)}>{details['email'] ? details['email'] : 'なし'}</p>
         <div className={classNames(styles.title, 'mt-2')}>電話番号</div>
         <p className={classNames(styles.info)}>{details['phone'] ? details['phone'] : 'なし'}</p>
-        <div className="mt-5 flex items-center">
-          {cancelBtn ? (
-            <button className="mx-auto rounded-lg bg-gray-400 px-10 py-1 text-lg text-white" onClick={cancel}>
-              キャンセル
-            </button>
-          ) : (
-            <button className="mx-auto rounded-lg bg-red-500 px-10 py-1 text-lg text-white" onClick={handleRequest}>
-              要求
-            </button>
-          )}
-        </div>
+        <div className="mt-5 flex items-center">{showButton()}</div>
       </div>
     </div>
   );

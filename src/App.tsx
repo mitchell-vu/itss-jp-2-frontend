@@ -26,7 +26,7 @@ const App = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  console.log(user?.role);
+  // console.log(user?.role);
 
   return (
     <>

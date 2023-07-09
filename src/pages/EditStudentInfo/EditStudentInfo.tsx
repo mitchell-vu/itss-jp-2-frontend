@@ -51,7 +51,7 @@ const EditStudentInfo: React.FC = () => {
     };
 
     console.log(details);
-    editStudentInfo(details.id_student, params)
+    editStudentInfo(params)
       .then((response) => {
         console.log('Update successful:', response.data);
       })
@@ -64,115 +64,121 @@ const EditStudentInfo: React.FC = () => {
       {/* {student && ( */}
       <form className="flex flex-col items-center justify-center">
         <div className="h-auto w-80">
-          <img src="https://motto-jp.com/media/wp-content/uploads/2020/07/AdobeStock_257074046.jpeg" alt="" />
+          <img
+            src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+            alt="Avatar user"
+            className="w-50 md:w-50 mx-auto rounded-full"
+          />
         </div>
-        <div className={classNames(styles['info'], 'mt-1.5 flex')}>
-          <div className="flex flex-col items-end">
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>名前:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="name"
-                value={student?.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex">
-              <div className={classNames(styles.title)}>年:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="age"
-                value={student?.age}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>メール:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="email"
-                value={student?.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>電話番号:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="phone"
-                value={student?.phone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>宛先:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="address"
-                value={student?.address}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>教育レベル:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="academic_level"
-                value={student?.academic_level}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="m-1 flex ">
-              <div className={classNames(styles.title)}>伝記:</div>
-              <input
-                className={classNames(
-                  styles.info,
-                  ' w-96 rounded-md border border-orange-300 px-4 py-1 focus:border-orange-500 active:border-orange-500',
-                )}
-                type="text"
-                name="description"
-                value={student?.description}
-                onChange={handleChange}
-              />
+        <div className=" flex flex-row gap-8">
+          <div className={classNames(styles['info'], 'mt-3 flex')}>
+            <div className="flex flex-col items-end">
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>名前:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="name"
+                  value={student?.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex">
+                <div className={classNames(styles.title)}>年:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="age"
+                  value={student?.age}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>メール:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="email"
+                  value={student?.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>電話番号:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="phone"
+                  value={student?.phone}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>宛先:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="address"
+                  value={student?.address}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>教育レベル:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="academic_level"
+                  value={student?.academic_level}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="m-1 flex ">
+                <div className={classNames(styles.title)}>伝記:</div>
+                <input
+                  className={classNames(
+                    styles.info,
+                    ' w-96 rounded-md border border-gray-300 px-4 py-1 focus:border-gray-500 active:border-gray-500',
+                  )}
+                  type="text"
+                  name="description"
+                  value={student?.description}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <button
-            className="focus:shadow-outline rounded-md bg-orange-500 px-6 py-2 text-white hover:bg-orange-400 focus:outline-none"
-            type="submit"
-            onClick={(e) => {
-              if (student !== undefined) {
-                handleSubmit(e, student);
-              }
-            }}
-          >
-            保存する
-          </button>
+          <div>
+            <button
+              className="focus:shadow-outline mt-3 rounded-md bg-gray-500 px-6 py-2 text-white hover:bg-gray-400 focus:outline-none"
+              type="submit"
+              onClick={(e) => {
+                if (student !== undefined) {
+                  handleSubmit(e, student);
+                }
+              }}
+            >
+              保存する
+            </button>
+          </div>
         </div>
       </form>
       {/* )} */}
