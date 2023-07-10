@@ -11,7 +11,7 @@ const TutorReview: React.FC<TutorReviewProps> = ({ cmt_detail }) => {
   const [name, setName] = useState<string>();
   useEffect(() => {
     getStudentDetail(String(cmt_detail.id_student)).then((student) => {
-      setName(student.data.name);
+      setName(student.data.data.name);
     });
   }, [cmt_detail.id_student]);
   return (

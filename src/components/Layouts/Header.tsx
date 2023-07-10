@@ -141,6 +141,13 @@ const Header: React.FunctionComponent<HeaderProps> = () => {
           ) : (
             <>
               <Link
+                to="/teachers/search"
+                className="flex items-center justify-center gap-2 rounded-lg bg-red-500 p-3 text-white"
+              >
+                先生を検索
+                <FiArrowRight />
+              </Link>
+              <Link
                 to="/auth/login"
                 className="mr-2 rounded-lg bg-teal-500 p-3 py-2 text-base font-medium text-white hover:bg-teal-600 lg:px-5 lg:py-2.5"
               >
